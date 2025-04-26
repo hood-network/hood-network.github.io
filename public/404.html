@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>hood network</title>
+
+    <style>
+        :root {
+            --hn-ref-font-brand: "Dela Gothic One", sans-serif;
+
+            --hn-sys-color-on-background: #ffffff;
+            --hn-sys-color-accent: #3C3F44;
+
+            --hn-sys-custom-color-hood-network-red: #FF6868;
+            --hn-sys-grad-background: linear-gradient(to top, #181B1E, #23272B);
+            --hn-sys-grad-card: linear-gradient(to bottom right, #5a5c60, #3C4044);
+        }
+
+        html {
+            min-height: 100vh;
+        }
+
+        body {
+            background: var(--hn-sys-grad-background);
+
+            margin: 7% auto 0;
+            max-width: 390px;
+            min-height: 180px;
+            padding: 30px 0 15px;
+        }
+        
+        .product-logo {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+            align-items: center;
+
+            user-select: none;
+        }
+
+        .product-logo > svg {
+            height: 1em;
+            fill: var(--hn-sys-custom-color-hood-network-red);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .product-logo > svg:hover {
+            animation: 2s infinite spin;
+        }
+
+        .product-logo > span {
+            font-family: var(--hn-ref-font-brand);
+            color: var(--hn-sys-color-on-background);
+        }
+
+        .card-wrapper {
+            padding: 1px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--hn-sys-grad-card);
+            color: var(--hn-sys-color-on-background);
+
+            width: 100%;
+            position: relative;
+        }
+
+        .card {
+            background-color: var(--hn-sys-color-accent);
+            border-radius: inherit;
+            overflow: hidden;
+
+            font-family: "Roboto", sans-serif;
+
+            width: 100%;
+            padding: 24px;
+            box-sizing: border-box;
+
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .section {
+            position: relative;
+        }
+
+        .section > h1 {
+            font-family: "Dela Gothic One";
+            margin: 0;
+        }
+
+        .content {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+        }
+
+        .avatar-row {
+            margin-top: 10px;
+            display: grid;
+            gap: 1em;
+            grid-template-columns: repeat(auto-fill,minmax(70px,1fr));
+        }
+
+        .avatar-row > a {
+            width: auto;
+            height: auto;
+            text-decoration: none;
+            border-radius: 100%;
+            overflow: hidden;
+            aspect-ratio: 1/1;
+        }
+
+
+        .avatar-row > a > img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .link-shelf {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        p > a {
+            color: var(--hn-sys-custom-color-hood-network-red);
+        }
+
+        .card-deco {
+            position: absolute;
+            user-select: none;
+            font-size: 15em;
+            bottom: -.25em;
+            right: -.25em;
+            opacity: 0.2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="product-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
+                <path d="M6.99471698,9.67522659 C8.47108874,9.67522659 9.66792453,8.47748685 9.66792453,7 C9.66792453,5.52251315 8.47108874,4.32477341 6.99471698,4.32477341 C5.51834522,4.32477341 4.32150943,5.52251315 4.32150943,7 C4.32150943,8.47748685 5.51834522,9.67522659 6.99471698,9.67522659 Z M6.99471698,2.67522659 C8.18867925,2.67522659 9.26641509,3.16163142 10.0483019,3.94410876 L11.9396226,2.05135952 C10.6822642,0.782477341 8.92830189,0 6.99471698,0 C3.12754717,0 0,3.14048338 0,7 L2.67320755,7 C2.67320755,4.6102719 4.60679245,2.67522659 6.99471698,2.67522659 Z M11.3267925,7 C11.3267925,9.3897281 9.39320755,11.3247734 7.00528302,11.3247734 C5.81132075,11.3247734 4.73358491,10.8383686 3.94113208,10.0558912 L2.04981132,11.9486405 C3.31773585,13.2175227 5.06113208,14 6.99471698,14 C10.8618868,14 14,10.8595166 14,7 L11.3267925,7 Z"/>
+            </svg>
+            <span>hood network</span>
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="card-wrapper">
+            <div class="card">
+                <span class="card-deco">🛸</span>
+                <div class="section">
+                    <h1>404</h1>
+                    <p>maybe try returning back to the <a href="/">mothership</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

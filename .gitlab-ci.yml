@@ -1,0 +1,20 @@
+# The Docker image that will be used to build your app
+image: node:22-alpine
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  GIT_SUBMODULE_FORCE_HTTPS: "true"
+
+pages:
+  script:
+    # Add brotli for compression
+    - apk add --no-cache brotli
+    # Optimize output files via gzip & brotli
+    - find public -type f -regex '.*\.\(htm\|html\|xml\|txt\|text\|js\|css\|svg\|woff2\)$' -exec gzip -f -k {} \;
+    - find public -type f -regex '.*\.\(htm\|html\|xml\|txt\|text\|js\|css\|svg\|woff2\)$' -exec brotli -f -k {} \;
+  pages:
+    publish: public
+  rules:
+    # This ensures that only pushes to the default branch will trigger
+    # a pages deploy
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
