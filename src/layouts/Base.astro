@@ -1,0 +1,108 @@
+---
+interface Props {
+    title: string;
+    description: string;
+    children: any;
+}
+
+const { title, description } = Astro.props;
+---
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
+
+        <title>{title}</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Roboto&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="preconnect" href="https://github.com" crossorigin />
+        <link rel="preconnect" href="https://bignutty.gitlab.io" crossorigin />
+
+        <title>{title}</title>
+
+        <meta property="og:type" content="website" />
+
+        <meta content={title} property="og:title" />
+        <meta content={description} property="og:description" />
+        <meta content={description} name="description" />
+
+        <meta content={title} property="twitter:title" />
+        <meta content={description} property="twitter:description" />
+
+        <meta name="theme-color" content="#ff6868" />
+
+        <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+    </head>
+    <body>
+        <slot />
+    </body>
+</html>
+
+<style>
+    :root {
+        --hn-ref-font-brand: "Dela Gothic One", sans-serif;
+        --hn-ref-font-plain: "Roboto", sans-serif;
+        --hn-sys-color-on-background: #fff;
+        --hn-sys-color-accent: #3c3f44;
+        --hn-sys-custom-color-hood-network-red: #ff6868;
+        --hn-sys-grad-background: linear-gradient(0deg, #181b1e, #23272b);
+        --hn-sys-grad-card: linear-gradient(to bottom right, #5a5c60, #3c4044);
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --hn-sys-color-on-background: #404040;
+            --hn-sys-color-accent: #f1f2f3;
+            --hn-sys-grad-background: linear-gradient(0deg, #ffffff, #f9fafb);
+            --hn-sys-grad-card: linear-gradient(
+                to bottom right,
+                #d6d8db,
+                #e4e5e7
+            );
+        }
+    }
+
+    :global(*) {
+        /* box-sizing: border-box; */
+        padding: 0;
+        margin: 0;
+    }
+
+    html {
+        min-height: 100vh;
+    }
+
+    body {
+        box-sizing: border-box;
+        min-height: 100vh;
+        background: var(--hn-sys-grad-background);
+        color: var(--hn-sys-color-on-background);
+        font-family: var(--hn-ref-font-plain);
+    }
+
+    @supports (min-height: 100cqh) {
+        body {
+            min-h: 100cqh;
+        }
+    }
+
+    @supports (min-height: 100svh) {
+        body {
+            min-h: 100svh;
+        }
+    }
+
+    :global(a) {
+        color: var(--hn-sys-custom-color-hood-network-red);
+    }
+</style>

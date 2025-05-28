@@ -1,0 +1,38 @@
+---
+import Logo from "@components/svgs/Logo.svg";
+---
+
+<div class="product-logo">
+    <Logo />
+    <span>hood network</span>
+</div>
+<style>
+    .product-logo {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        user-select: none;
+    }
+
+    .product-logo > svg {
+        height: 1em;
+        fill: var(--hn-sys-custom-color-hood-network-red);
+    }
+
+    .product-logo > svg:hover {
+        animation: spin 2s infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(1turn);
+        }
+    }
+
+    .product-logo > span {
+        font-family: var(--hn-ref-font-brand);
+    }
+</style>

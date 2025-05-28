@@ -1,0 +1,46 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+export type Props = CollectionEntry<"authors">["data"];
+
+const { name, avatar, url } = Astro.props;
+---
+
+<a href={url}>
+    <div>
+        <!-- TODO: use /authors/{name} here -->
+        <img src={avatar} alt={name === "Vocane" ? null : name} />
+        {name}
+    </div>
+</a>
+
+<style>
+    a {
+        display: inline-flex;
+        padding: 1px;
+        background: var(--hn-sys-grad-card);
+        border-radius: 1em;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    a > div {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        padding: 5px;
+        padding-right: 8px;
+        background-color: var(--hn-sys-color-accent);
+        border-radius: inherit;
+        box-sizing: border-box;
+    }
+
+    a > div > img {
+        width: 1.2em;
+    }
+
+    a > div > img[alt] {
+        border-radius: 100%;
+    }
+</style>

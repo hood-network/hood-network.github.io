@@ -1,0 +1,40 @@
+{
+    "files": {
+        "ignore": [".astro/**", "authors/**"]
+    },
+    "organizeImports": {
+        "enabled": true
+    },
+    "linter": {
+        "rules": {
+            "complexity": {
+                "noBannedTypes": { "level": "off" }
+            },
+            "correctness": {
+                "noUnusedImports": { "level": "off" }
+            },
+            "performance": {
+                "noDelete": { "level": "off" }
+            },
+            "style": {
+                "noNonNullAssertion": { "level": "off" }
+            },
+            "suspicious": {
+                "noConfusingVoidType": { "level": "off" },
+                "noEmptyInterface": { "level": "off" },
+                "noExplicitAny": { "level": "off" }
+            }
+        }
+    },
+    "formatter": {
+        "enabled": true,
+        "indentStyle": "space",
+        "indentWidth": 4
+    },
+    "javascript": {
+        "formatter": {
+            "semicolons": "always",
+            "arrowParentheses": "asNeeded"
+        }
+    }
+}

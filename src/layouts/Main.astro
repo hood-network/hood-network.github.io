@@ -1,0 +1,72 @@
+---
+import Base from "@layouts/Base.astro";
+
+import ProductLogo from "@components/ProductLogo.astro";
+import ChevronRight from "@components/svgs/ChevronRight.svg";
+
+interface Props {
+    title: string;
+    description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<Base title={title} description={description}>
+    <main>
+        <header>
+            <ProductLogo />
+            <a href="/blog" class="blog-link">
+                blog
+                <ChevronRight class="blog-chevron" />
+            </a>
+        </header>
+
+        <div class="content">
+            <slot />
+        </div>
+    </main>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        main {
+            max-width: 390px;
+            min-height: 180px;
+            padding: 30px 1em 15px;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .blog-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .blog-chevron {
+            height: 1em;
+            fill: currentColor;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            margin-top: 10px;
+        }
+    </style>
+</Base>

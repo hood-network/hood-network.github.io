@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content";
+
+import BlogBase from "@layouts/BlogBase.astro";
+
+import BlogCard from "@components/BlogCard.astro";
+
+const collection = await getCollection("blog");
+---
+
+<BlogBase
+    title="hood network · blog"
+    description="👽👽👽"
+    fragments={[{ path: "/blog", content: "blog" }]}
+>
+    <main>
+        {
+            collection.map((entry) => {
+                return <BlogCard {...entry} />;
+            })
+        }
+    </main>
+</BlogBase>
+<style>
+    main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1em;
+        min-width: min(900px, 100%);
+        max-width: 900px;
+    }
+
+    @media (max-width: 900px) {
+        main {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

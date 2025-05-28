@@ -1,0 +1,60 @@
+---
+import Alien from "@components/svgs/Alien.svg";
+import Card from "@components/Card.astro";
+
+import { members } from "@authors";
+---
+
+<Card title="who?">
+    <Alien class="card-deco" slot={"pre-section"} />
+
+    <div class="avatar-row">
+        {
+            members.map((member) => {
+                return (
+                    <a title={member.name} href={member.url}>
+                        <img
+                            src={member.avatar}
+                            alt={member.name === "Vocane" ? null : member.name}
+                        />
+                    </a>
+                );
+            })
+        }
+    </div>
+</Card>
+<style>
+    .card-deco {
+        bottom: -0.25em;
+        font-size: 15em;
+        opacity: 0.2;
+        position: absolute;
+        right: -0.25em;
+        user-select: none;
+        width: 1.5em;
+    }
+
+    .avatar-row {
+        display: grid;
+        gap: 1em;
+        margin-top: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    }
+
+    .avatar-row > a {
+        aspect-ratio: 1/1;
+        height: auto;
+        overflow: hidden;
+        text-decoration: none;
+        width: auto;
+    }
+
+    .avatar-row > a:has(img[alt]) {
+        border-radius: 100%;
+    }
+
+    .avatar-row > a > img {
+        height: 100%;
+        width: 100%;
+    }
+</style>
