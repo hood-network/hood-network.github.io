@@ -1,0 +1,27 @@
+---
+import Main from "@layouts/Main.astro";
+
+import Ufo from "@components/svgs/Ufo.svg";
+import Card from "@components/Card.astro";
+---
+
+<Main title="hood network · 404" description="👽👽👽">
+    <Card title="404">
+        <Ufo class="card-deco" slot={"pre-section"} />
+
+        <p>
+            maybe try returning back to the <a href="/">mothership</a>.
+        </p>
+    </Card>
+</Main>
+<style>
+    .card-deco {
+        bottom: -0.25em;
+        font-size: 15em;
+        opacity: 0.2;
+        position: absolute;
+        right: -0.25em;
+        user-select: none;
+        width: 1.5em;
+    }
+</style>

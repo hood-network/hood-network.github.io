@@ -1,0 +1,128 @@
+---
+import { getEntries, type CollectionEntry } from "astro:content";
+
+import BlogBase from "@layouts/BlogBase.astro";
+
+import Author from "@components/Author.astro";
+
+type Props = CollectionEntry<"blog">;
+
+const {
+    id,
+    data: { title, description, authors },
+} = Astro.props;
+
+const authorEntries = await getEntries(authors);
+const authorList = authorEntries.map((a) => a.data);
+---
+
+<BlogBase
+    title={`hood network · ${title}`}
+    description={description}
+    fragments={[
+        {
+            path: "/blog",
+            content: "blog",
+        },
+        {
+            path: `/blog/${id}`,
+            content: id,
+        },
+    ]}
+>
+    <main>
+        <div class="pre-content">
+            <h1>{title}</h1>
+            <span
+                >written by {
+                    authorList.map((author) => {
+                        return <Author {...author} />;
+                    })
+                }
+            </span>
+        </div>
+
+        <article>
+            <slot />
+        </article>
+    </main>
+</BlogBase>
+
+<style>
+    main {
+        min-width: min(900px, 100%);
+        max-width: 900px;
+    }
+
+    .pre-content {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 2em;
+    }
+
+    .pre-content h1 {
+        margin: 0;
+    }
+
+    .pre-content span {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+</style>
+<style is:global>
+    article h1 {
+        font-size: 2em;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 1em 0;
+    }
+
+    ol,
+    ul {
+        padding-left: 2em;
+    }
+
+    ul.contains-task-list {
+        list-style-type: none;
+        padding-left: 1em;
+    }
+
+    li.task-list-item > input[type="checkbox"] {
+        display: inline-block;
+        margin-right: 0.5em;
+        translate: 0 -2px;
+        width: 1em;
+        height: 1em;
+        border-radius: 2px;
+        vertical-align: middle;
+    }
+
+    img {
+        max-width: 100%;
+    }
+
+    p {
+        margin: 1em 0;
+    }
+
+    pre {
+        margin: 1em 0;
+    }
+
+    blockquote {
+        padding-left: 1em;
+        border-left: 2px solid var(--hn-sys-color-on-background);
+    }
+
+    table {
+        margin: 1em 0;
+    }
+</style>

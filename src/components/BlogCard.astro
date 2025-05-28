@@ -1,0 +1,90 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Card from "./Card.astro";
+
+type Props = CollectionEntry<"blog">;
+
+const {
+    id,
+    data: { title, description, date },
+} = Astro.props;
+---
+
+<a href={`/blog/${id}`}>
+    <div class="card">
+        <img
+            src="/static/av/arhsm.256.png"
+            slot="pre-section"
+            alt="post banner"
+            class="banner"
+        />
+
+        <div class="section">
+            <span class="publish-date">
+                {date.getMonth()}.{date.getDate()}.{date.getFullYear()}
+            </span>
+
+            <h1 class="line-clamp">{title}</h1>
+
+            <p class="description line-clamp">{description}</p>
+        </div>
+    </div>
+</a>
+<style>
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 24px;
+        width: 100%;
+        background-color: var(--hn-sys-color-accent);
+        border-radius: 24px;
+        box-sizing: border-box;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .section {
+        position: relative;
+    }
+
+    .line-clamp {
+        --line-clamp: 1;
+
+        display: -webkit-box;
+        -webkit-line-clamp: var(--line-clamp);
+        -webkit-box-orient: vertical;
+        line-clamp: var(--line-clamp);
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .section > h1 {
+        font-family: var(--hn-ref-font-brand);
+        margin: 0;
+    }
+
+    @media (max-width: 600px) {
+        .section > h1 {
+            font-size: 1.5em;
+        }
+    }
+
+    .banner {
+        /* position: absolute;
+        top: 0;
+        left: 0; */
+        margin: 0 -24px;
+        margin-top: -24px;
+        margin-bottom: 10px;
+        height: 150px;
+        object-fit: cover;
+        border-bottom-left-radius: inherit;
+        border-bottom-right-radius: inherit;
+    }
+</style>

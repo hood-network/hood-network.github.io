@@ -1,0 +1,53 @@
+---
+interface Props {
+    title: string;
+    children: any;
+}
+
+const { title } = Astro.props;
+---
+
+<div class="card-wrapper">
+    <div class="card">
+        <slot name="pre-section" />
+
+        <div class="section">
+            <h1>{title}</h1>
+
+            <slot />
+        </div>
+    </div>
+</div>
+<style>
+    .card,
+    .card-wrapper {
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .card-wrapper {
+        background: var(--hn-sys-grad-card);
+        border-radius: 8px;
+        padding: 1px;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 24px;
+        background-color: var(--hn-sys-color-accent);
+        border-radius: inherit;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    .section {
+        position: relative;
+    }
+
+    .section > h1 {
+        font-family: var(--hn-ref-font-brand);
+        margin: 0;
+    }
+</style>
