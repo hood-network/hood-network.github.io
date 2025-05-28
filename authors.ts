@@ -90,13 +90,18 @@ export const members: Member[] = [
     },
 ];
 
-if (import.meta.main) {
-    const { rm, mkdir } = await import("node:fs/promises");
+// TODO: use this when it releases
+// if (import.meta.main) {
+if (process.argv[1] === import.meta.filename) {
+    const { rm, mkdir, writeFile } = await import("node:fs/promises");
 
     await rm("./authors", { recursive: true, force: true });
     await mkdir("./authors", { recursive: true });
 
     for (const member of members) {
-        Bun.write(`./authors/${member.name}.json`, JSON.stringify(member));
+        await writeFile(
+            `./authors/${member.name}.json`,
+            JSON.stringify(member),
+        );
     }
 }

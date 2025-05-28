@@ -3,16 +3,17 @@
     "version": "0.0.1",
     "type": "module",
     "scripts": {
-        "prebuild": "bun authors.ts",
-        "dev": "bun run prebuild && astro dev",
-        "build": "bun run prebuild && astro build",
-        "preview": "bun run prebuild && astro preview",
+        "prebuild": "node --experimental-strip-types ./authors.ts",
+        "dev": "pnpm run prebuild && astro dev",
+        "build": "pnpm run prebuild && astro build",
+        "preview": "pnpm run prebuild && astro preview",
         "astro": "astro"
     },
+    "packageManager": "pnpm@10.11.0",
     "dependencies": {
         "astro": "5.8.0"
     },
     "devDependencies": {
-        "@types/bun": "^1.2.13"
+        "@types/node": "22.15.23"
     }
 }
