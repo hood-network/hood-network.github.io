@@ -65,7 +65,7 @@ export const members: Member[] = [
     },
     {
         name: "Vocane",
-        avatar: "/index.html",
+        avatar: ".",
         url: "https://voc.pet",
     },
     {
@@ -100,4 +100,3 @@ if (import.meta.main) {
         Bun.write(`./authors/${member.name}.json`, JSON.stringify(member));
     }
 }
-
