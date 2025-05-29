@@ -1,6 +1,6 @@
 ---
-import Alien from "@components/svgs/Alien.svg";
 import Card from "@components/Card.astro";
+import Alien from "@components/svgs/Alien.svg";
 
 import { members } from "@authors";
 ---
@@ -10,7 +10,7 @@ import { members } from "@authors";
 
     <div class="avatar-row">
         {
-            members.map((member) => {
+            members.map(member => {
                 return (
                     <a title={member.name} href={member.url}>
                         <img

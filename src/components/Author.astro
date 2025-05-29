@@ -8,7 +8,6 @@ const { name, avatar, url } = Astro.props;
 
 <a href={url}>
     <div>
-        <!-- TODO: use /authors/{name} here -->
         <img src={avatar} alt={avatar === "." ? null : name} />
         {name}
     </div>

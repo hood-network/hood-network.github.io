@@ -7,13 +7,25 @@
         "dev": "pnpm run prebuild && astro dev",
         "build": "pnpm run prebuild && astro build",
         "preview": "pnpm run prebuild && astro preview",
-        "astro": "astro"
+        "astro": "astro",
+        "lint": "biome check --formatter-enabled false src",
+        "lint:fix": "biome check --formatter-enabled false --write src",
+        "format": "prettier --check src && biome format src",
+        "format:fix": "prettier --write src && biome format --write src"
     },
     "packageManager": "pnpm@10.11.0",
     "dependencies": {
         "astro": "5.8.0"
     },
     "devDependencies": {
-        "@types/node": "22.15.23"
+        "@biomejs/biome": "1.9.4",
+        "@types/node": "22.15.23",
+        "github-slugger": "2.0.0",
+        "mdast": "3.0.0",
+        "mdast-util-to-string": "4.0.0",
+        "prettier": "3.5.3",
+        "prettier-plugin-astro": "0.14.1",
+        "typescript": "5.8.3",
+        "unist-util-visit": "5.0.0"
     }
 }

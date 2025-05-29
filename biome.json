@@ -11,7 +11,7 @@
                 "noBannedTypes": { "level": "off" }
             },
             "correctness": {
-                "noUnusedImports": { "level": "off" }
+                "noUnusedImports": { "level": "error" }
             },
             "performance": {
                 "noDelete": { "level": "off" }
@@ -26,6 +26,18 @@
             }
         }
     },
+    "overrides": [
+        {
+            "include": ["*.astro"],
+            "linter": {
+                "rules": {
+                    "correctness": {
+                        "noUnusedImports": { "level": "off" }
+                    }
+                }
+            }
+        }
+    ],
     "formatter": {
         "enabled": true,
         "indentStyle": "space",

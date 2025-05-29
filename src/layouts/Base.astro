@@ -12,8 +12,8 @@ const { title, description } = Astro.props;
     <head>
         <meta charset="UTF-8" />
         <meta
-            name="viewport"
             content="width=device-width, initial-scale=1, viewport-fit=cover"
+            name="viewport"
         />
 
         <title>{title}</title>
@@ -21,7 +21,7 @@ const { title, description } = Astro.props;
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Roboto&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Roboto&family=Figtree:ital,wght@0,700;1,700&display=swap"
             rel="stylesheet"
         />
 
@@ -30,7 +30,7 @@ const { title, description } = Astro.props;
 
         <title>{title}</title>
 
-        <meta property="og:type" content="website" />
+        <meta content="website" property="og:type" />
 
         <meta content={title} property="og:title" />
         <meta content={description} property="og:description" />
@@ -39,7 +39,7 @@ const { title, description } = Astro.props;
         <meta content={title} property="twitter:title" />
         <meta content={description} property="twitter:description" />
 
-        <meta name="theme-color" content="#ff6868" />
+        <meta content="#ff6868" name="theme-color" />
 
         <link rel="shortcut icon" href="/favicon.png" type="image/png" />
     </head>
@@ -51,10 +51,17 @@ const { title, description } = Astro.props;
 <style>
     :root {
         --hn-ref-font-brand: "Dela Gothic One", sans-serif;
+        --hn-ref-font-heading: "Figtree", sans-serif;
         --hn-ref-font-plain: "Roboto", sans-serif;
+
+        --hn-sys-custom-color-hood-network-red: #ff6868;
+
         --hn-sys-color-on-background: #fff;
         --hn-sys-color-accent: #3c3f44;
-        --hn-sys-custom-color-hood-network-red: #ff6868;
+        --hn-sys-color-outline: #545659;
+        --hn-sys-color-surface-variant: #303236;
+        --hn-sys-color-outline-variant: #5a5c60;
+
         --hn-sys-grad-background: linear-gradient(0deg, #181b1e, #23272b);
         --hn-sys-grad-card: linear-gradient(to bottom right, #5a5c60, #3c4044);
     }
@@ -63,6 +70,10 @@ const { title, description } = Astro.props;
         :root {
             --hn-sys-color-on-background: #404040;
             --hn-sys-color-accent: #f1f2f3;
+            --hn-sys-color-outline: #c9cbcf;
+            --hn-sys-color-surface-variant: #f1f2f3;
+            --hn-sys-color-outline-variant: #23272b;
+
             --hn-sys-grad-background: linear-gradient(0deg, #ffffff, #f9fafb);
             --hn-sys-grad-card: linear-gradient(
                 to bottom right,
@@ -92,13 +103,13 @@ const { title, description } = Astro.props;
 
     @supports (min-height: 100cqh) {
         body {
-            min-h: 100cqh;
+            min-height: 100cqh;
         }
     }
 
     @supports (min-height: 100svh) {
         body {
-            min-h: 100svh;
+            min-height: 100svh;
         }
     }
 

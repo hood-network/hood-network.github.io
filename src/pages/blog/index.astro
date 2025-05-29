@@ -9,13 +9,13 @@ const collection = await getCollection("blog");
 ---
 
 <BlogBase
-    title="hood network · blog"
+    title="blog"
     description="👽👽👽"
     fragments={[{ path: "/blog", content: "blog" }]}
 >
     <main>
         {
-            collection.map((entry) => {
+            collection.map(entry => {
                 return <BlogCard {...entry} />;
             })
         }

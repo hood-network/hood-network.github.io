@@ -75,7 +75,7 @@ authors: [arhsm, vocane]
 
 ### Inline Code
 
-`print("Hello, world!")`
+Here is some inline `print("Hello, world!")` code
 
 ### Code Blocks
 
@@ -116,14 +116,14 @@ This is a plain code block.
 > This is a blockquote.
 > It can span multiple lines.
 > > And even be nested.
-<!-- 
+
 ## Tables
 
 | Header 1 | Header 2 | Header 3 | Header 3 | Header 3 | Header 3 | Header 3 | Header 3 | Header 3 | Header 3 | Header 3 | Header 3 | Header 3 | Header 3 | Header 3 |
 | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
 | Cell 1   | Cell 2   | Cell 3   | Cell 3   | Cell 3   | Cell 3   | Cell 3   | Cell 3   | Cell 3   | Cell 3   | Cell 3   | Cell 3   | Cell 3   | Cell 3   | Cell 3   |
 | Cell 4   | Cell 5   | Cell 6   | Cell 6   | Cell 6   | Cell 6   | Cell 6   | Cell 6   | Cell 6   | Cell 6   | Cell 6   | Cell 6   | Cell 6   | Cell 6   | Cell 6   |
- -->
+
 ## HTML
 
 <p>This is some HTML text.</p>
