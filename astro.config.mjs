@@ -4,7 +4,7 @@ import transform from "./src/plugins/mdTranform";
 export default defineConfig({
     site: "https://hoodnet.work",
     build: {
-        format: "preserve",
+        format: "file",
     },
     markdown: {
         gfm: true,
