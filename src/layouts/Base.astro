@@ -54,27 +54,33 @@ const { title, description } = Astro.props;
         --hn-ref-font-heading: "Figtree", sans-serif;
         --hn-ref-font-plain: "Roboto", sans-serif;
 
-        --hn-sys-custom-color-hood-network-red: #ff6868;
+        --hn-ref-palette-brand: #ff6868;
 
-        --hn-sys-color-on-background: #fff;
         --hn-sys-color-accent: #3c3f44;
+
         --hn-sys-color-outline: #545659;
+
         --hn-sys-color-surface-variant: #303236;
         --hn-sys-color-outline-variant: #5a5c60;
 
+        --hn-sys-color-on-background: #fff;
         --hn-sys-grad-background: linear-gradient(0deg, #181b1e, #23272b);
+
         --hn-sys-grad-card: linear-gradient(to bottom right, #5a5c60, #3c4044);
     }
 
     @media (prefers-color-scheme: light) {
         :root {
-            --hn-sys-color-on-background: #404040;
             --hn-sys-color-accent: #f1f2f3;
+
             --hn-sys-color-outline: #c9cbcf;
+
             --hn-sys-color-surface-variant: #f1f2f3;
             --hn-sys-color-outline-variant: #23272b;
 
+            --hn-sys-color-on-background: #404040;
             --hn-sys-grad-background: linear-gradient(0deg, #ffffff, #f9fafb);
+
             --hn-sys-grad-card: linear-gradient(
                 to bottom right,
                 #d6d8db,
@@ -84,19 +90,19 @@ const { title, description } = Astro.props;
     }
 
     :global(*) {
-        /* box-sizing: border-box; */
-        padding: 0;
+        box-sizing: border-box;
         margin: 0;
+        padding: 0;
     }
 
     html {
         min-height: 100vh;
+        scrollbar-width: thin;
     }
 
     body {
-        box-sizing: border-box;
-        min-height: 100vh;
         background: var(--hn-sys-grad-background);
+        min-height: 100vh;
         color: var(--hn-sys-color-on-background);
         font-family: var(--hn-ref-font-plain);
     }
@@ -114,6 +120,6 @@ const { title, description } = Astro.props;
     }
 
     :global(a) {
-        color: var(--hn-sys-custom-color-hood-network-red);
+        color: var(--hn-ref-palette-brand);
     }
 </style>

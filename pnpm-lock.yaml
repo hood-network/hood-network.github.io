@@ -15,6 +15,12 @@ importers:
       '@biomejs/biome':
         specifier: 1.9.4
         version: 1.9.4
+      '@richardtowers/remark-abbr':
+        specifier: 1.1.5
+        version: 1.1.5
+      '@syntect/node':
+        specifier: 0.0.4
+        version: 0.0.4
       '@types/node':
         specifier: 22.15.23
         version: 22.15.23
@@ -33,9 +39,15 @@ importers:
       prettier-plugin-astro:
         specifier: 0.14.1
         version: 0.14.1
+      prettier-plugin-css-order:
+        specifier: 2.1.2
+        version: 2.1.2(postcss@8.5.3)(prettier@3.5.3)
       typescript:
         specifier: 5.8.3
         version: 5.8.3
+      unified:
+        specifier: 11.0.5
+        version: 11.0.5
       unist-util-visit:
         specifier: 5.0.0
         version: 5.0.0
@@ -396,6 +408,9 @@ packages:
   '@oslojs/encoding@1.1.0':
     resolution: {integrity: sha512-70wQhgYmndg4GCPxPPxPGevRKqTIJ2Nh4OkiMWmDAVYsTQ+Ta7Sq+rPevXyXGdzr30/qZBnyOalCszoMxlyldQ==}
 
+  '@richardtowers/remark-abbr@1.1.5':
+    resolution: {integrity: sha512-Rmd50UXEeCK/rtmDu+WdwTrIiMeP4XOKkBwN9Bv/3MC2ad+EK1mDKn+N4++N/pZ3kXfdg79ocMeaj9ordV3p9Q==}
+
   '@rollup/pluginutils@5.1.4':
     resolution: {integrity: sha512-USm05zrsFxYLPdWWq+K3STlWiT/3ELn3RcV5hJMghpeAIhxfsUIg6mt12CBJBInWMV4VneoV7SfGv8xIwo2qNQ==}
     engines: {node: '>=14.0.0'}
@@ -528,6 +543,89 @@ packages:
 
   '@swc/helpers@0.5.17':
     resolution: {integrity: sha512-5IKx/Y13RsYd+sauPb2x+U/xZikHjolzfuDgTAl/Tdf3Q8rslRvC19NKDLgAJQ6wsqADk10ntlv08nPFw/gO/A==}
+
+  '@syntect/node-android-arm-eabi@0.0.4':
+    resolution: {integrity: sha512-naJKb2bf7RNGmZBz7p1PHCQyIINa8S9hVe9hU0Lon7wPFIHpwtfkGZ5Ohr+nTdYt19j969ZmYdRUVOQfOJ481Q==}
+    engines: {node: '>= 10'}
+    cpu: [arm]
+    os: [android]
+
+  '@syntect/node-android-arm64@0.0.4':
+    resolution: {integrity: sha512-HKur30/rlcVTTM8whGyHNmL+i55AfYFeWs9kX8lobfZftivoIqM4UowG36Mi0f8VF8AqPQgI6i3RPnGm3B3V4A==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [android]
+
+  '@syntect/node-darwin-arm64@0.0.4':
+    resolution: {integrity: sha512-lVxvwZoAUHNvroARNBOkTRwMMT3paHbz0xyYgK4byhWHFN1todv351eYbeJ2q7vmZnYiw6F1yNUFyQ8zK1zEcQ==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@syntect/node-darwin-x64@0.0.4':
+    resolution: {integrity: sha512-g3+cbq8SSXZyt8hbRN8YKoUBYW5/SeT4NwntueuxtNya3YrRCFUVVBJAXTzKf1b4e/wUNr1pDq0SRzdeiPPJzQ==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@syntect/node-freebsd-x64@0.0.4':
+    resolution: {integrity: sha512-JAlh8w0cS9xZQr1MAomFVvo/JDDX/i85/hRuYeLe6edJS4ZlBGz+lc/YaWlmniUMWSXn2sxHOx90LdIMpElWKg==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [freebsd]
+
+  '@syntect/node-linux-arm-gnueabihf@0.0.4':
+    resolution: {integrity: sha512-tw4Lv/Nw/WqJqgBnVmY9kUzqNdksaKcTnH1cCbmyZEPLqs0P4UCw6CBa6Tor/GWFjItwAP6YAsUNWPwA/0CmHw==}
+    engines: {node: '>= 10'}
+    cpu: [arm]
+    os: [linux]
+
+  '@syntect/node-linux-arm64-gnu@0.0.4':
+    resolution: {integrity: sha512-AXH/l8FvO5Xt1RWhQOiMOcO9hnw7uQaqDpjmL2t6EmRcTYPvoZD5TnMNGMU7nt7v1Xd9R73MFUTVJy8xnE2C7w==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@syntect/node-linux-arm64-musl@0.0.4':
+    resolution: {integrity: sha512-bmh1rcZaizY8MOaxygY8sCutzMnJNxGEbuQZB4gLKv7TYJ8QvhZ1z4hyANrkVKEH2lT7GtOcCPMlc6GyK1fZug==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@syntect/node-linux-x64-gnu@0.0.4':
+    resolution: {integrity: sha512-WEH7p0frtlkCNN8yHM0w27rROWjQ08xu0wGlPwrLfvorC/vBvqEbPsuUFy8OFWsDa6S3JpYZgZEvEaMiIfhSwQ==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+
+  '@syntect/node-linux-x64-musl@0.0.4':
+    resolution: {integrity: sha512-TknXNSqPKG0uroXOJfUrkQkmiiylj/G5igd0/O/aflofQRjD+spwUaX2aYfUJqMxp7f73/d/kRIhR/QVST9ISg==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+
+  '@syntect/node-win32-arm64-msvc@0.0.4':
+    resolution: {integrity: sha512-tmNV0/gsUZOS1suiGU3tO62Y4/b994RUp0BKX/Kfh8KkNeQcwbSRQ3PWADReGbl2a3jZL/ZWAJNGyCxEtfUdyA==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@syntect/node-win32-ia32-msvc@0.0.4':
+    resolution: {integrity: sha512-R/YlFZrFUsIzSLnNui4OTNHJnAlO8Cy9V7SO2MdR/aAs7jtC7tPa8zTV/Mc4D6UlWLOj/vCCtSf7zRoAJFrJdA==}
+    engines: {node: '>= 10'}
+    cpu: [ia32]
+    os: [win32]
+
+  '@syntect/node-win32-x64-msvc@0.0.4':
+    resolution: {integrity: sha512-4DfI+/dUTn58rE41WJZBzAeHxKbRY7o7qwFnYW4r/wRe3nWf2dGskJCUFa4VdpEkawkz1wUqLUGyjiGp9PgiDg==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [win32]
+
+  '@syntect/node@0.0.4':
+    resolution: {integrity: sha512-SSRB3RkCp6TY3EvFgLHPhHS8r0UclYex7lx58m2GuG63SpGIQ6I0ojNCmCUrEzX7fbdB7rBLwWfkNy4qGlFK/A==}
+    engines: {node: '>= 10'}
+    hasBin: true
 
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
@@ -693,6 +791,12 @@ packages:
 
   crossws@0.3.5:
     resolution: {integrity: sha512-ojKiDvcmByhwa8YYqbQI/hg7MEU0NC03+pSdEq4ZUnZR9xXpwk7E43SMNGkn+JxJGPFtNvQ48+vV2p+P1ml5PA==}
+
+  css-declaration-sorter@7.2.0:
+    resolution: {integrity: sha512-h70rUM+3PNFuaBDTLe8wF/cdWu+dOZmb7pJt8Z2sedYbAcQVQV/tEchueg3GWxwqS0cxtbxmaHEdkNACqcvsow==}
+    engines: {node: ^14 || ^16 || >=18}
+    peerDependencies:
+      postcss: ^8.0.9
 
   css-tree@3.1.0:
     resolution: {integrity: sha512-0eW44TGN5SQXU1mWSkKwFstI/22X2bG1nYzZTYMAWjylYURhse752YgbE4Cx46AC+bAvI+/dYTPRk1LqSUnu6w==}
@@ -1135,6 +1239,18 @@ packages:
     resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
     engines: {node: '>=12'}
 
+  postcss-less@6.0.0:
+    resolution: {integrity: sha512-FPX16mQLyEjLzEuuJtxA8X3ejDLNGGEG503d2YGZR5Ask1SpDN8KmZUMpzCvyalWRywAn1n1VOA5dcqfCLo5rg==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      postcss: ^8.3.5
+
+  postcss-scss@4.0.9:
+    resolution: {integrity: sha512-AjKOeiwAitL/MXxQW2DliT28EKukvvbEWx3LBmJIRN8KfBGZbRTxNYW0kSqi1COiTZ57nZ9NW06S6ux//N1c9A==}
+    engines: {node: '>=12.0'}
+    peerDependencies:
+      postcss: ^8.4.29
+
   postcss@8.5.3:
     resolution: {integrity: sha512-dle9A3yYxlBSrt8Fu+IpjGT8SY8hN0mlaA6GY8t0P5PjIOZemULz/E2Bnm/2dcUOena75OTNkHI76uZBNUUq3A==}
     engines: {node: ^10 || ^12 || >=14}
@@ -1142,6 +1258,12 @@ packages:
   prettier-plugin-astro@0.14.1:
     resolution: {integrity: sha512-RiBETaaP9veVstE4vUwSIcdATj6dKmXljouXc/DDNwBSPTp8FRkLGDSGFClKsAFeeg+13SB0Z1JZvbD76bigJw==}
     engines: {node: ^14.15.0 || >=16.0.0}
+
+  prettier-plugin-css-order@2.1.2:
+    resolution: {integrity: sha512-vomxPjHI6pOMYcBuouSJHxxQClJXaUpU9rsV9IAO2wrSTZILRRlrxAAR8t9UF6wtczLkLfNRFUwM+ZbGXOONUA==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      prettier: 3.x
 
   prettier@3.5.3:
     resolution: {integrity: sha512-QQtaxnoDJeAkDvDKWCLiwIXkTgRhwYDEQCghU9Z6q03iyek/rxRh/2lC3HB7P8sWT2xC/y5JDctPLBIGzHKbhw==}
@@ -1811,6 +1933,22 @@ snapshots:
 
   '@oslojs/encoding@1.1.0': {}
 
+  '@richardtowers/remark-abbr@1.1.5':
+    dependencies:
+      devlop: 1.1.0
+      mdast-util-from-markdown: 2.0.2
+      mdast-util-to-markdown: 2.1.2
+      micromark-core-commonmark: 2.0.3
+      micromark-factory-whitespace: 2.0.1
+      micromark-util-character: 2.1.1
+      micromark-util-normalize-identifier: 2.0.1
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.2
+      unist-util-remove-position: 5.0.0
+      unist-util-visit: 5.0.0
+    transitivePeerDependencies:
+      - supports-color
+
   '@rollup/pluginutils@5.1.4(rollup@4.41.1)':
     dependencies:
       '@types/estree': 1.0.7
@@ -1915,6 +2053,61 @@ snapshots:
   '@swc/helpers@0.5.17':
     dependencies:
       tslib: 2.8.1
+
+  '@syntect/node-android-arm-eabi@0.0.4':
+    optional: true
+
+  '@syntect/node-android-arm64@0.0.4':
+    optional: true
+
+  '@syntect/node-darwin-arm64@0.0.4':
+    optional: true
+
+  '@syntect/node-darwin-x64@0.0.4':
+    optional: true
+
+  '@syntect/node-freebsd-x64@0.0.4':
+    optional: true
+
+  '@syntect/node-linux-arm-gnueabihf@0.0.4':
+    optional: true
+
+  '@syntect/node-linux-arm64-gnu@0.0.4':
+    optional: true
+
+  '@syntect/node-linux-arm64-musl@0.0.4':
+    optional: true
+
+  '@syntect/node-linux-x64-gnu@0.0.4':
+    optional: true
+
+  '@syntect/node-linux-x64-musl@0.0.4':
+    optional: true
+
+  '@syntect/node-win32-arm64-msvc@0.0.4':
+    optional: true
+
+  '@syntect/node-win32-ia32-msvc@0.0.4':
+    optional: true
+
+  '@syntect/node-win32-x64-msvc@0.0.4':
+    optional: true
+
+  '@syntect/node@0.0.4':
+    optionalDependencies:
+      '@syntect/node-android-arm-eabi': 0.0.4
+      '@syntect/node-android-arm64': 0.0.4
+      '@syntect/node-darwin-arm64': 0.0.4
+      '@syntect/node-darwin-x64': 0.0.4
+      '@syntect/node-freebsd-x64': 0.0.4
+      '@syntect/node-linux-arm-gnueabihf': 0.0.4
+      '@syntect/node-linux-arm64-gnu': 0.0.4
+      '@syntect/node-linux-arm64-musl': 0.0.4
+      '@syntect/node-linux-x64-gnu': 0.0.4
+      '@syntect/node-linux-x64-musl': 0.0.4
+      '@syntect/node-win32-arm64-msvc': 0.0.4
+      '@syntect/node-win32-ia32-msvc': 0.0.4
+      '@syntect/node-win32-x64-msvc': 0.0.4
 
   '@types/debug@4.1.12':
     dependencies:
@@ -2157,6 +2350,10 @@ snapshots:
   crossws@0.3.5:
     dependencies:
       uncrypto: 0.1.3
+
+  css-declaration-sorter@7.2.0(postcss@8.5.3):
+    dependencies:
+      postcss: 8.5.3
 
   css-tree@3.1.0:
     dependencies:
@@ -2817,6 +3014,14 @@ snapshots:
 
   picomatch@4.0.2: {}
 
+  postcss-less@6.0.0(postcss@8.5.3):
+    dependencies:
+      postcss: 8.5.3
+
+  postcss-scss@4.0.9(postcss@8.5.3):
+    dependencies:
+      postcss: 8.5.3
+
   postcss@8.5.3:
     dependencies:
       nanoid: 3.3.11
@@ -2828,6 +3033,15 @@ snapshots:
       '@astrojs/compiler': 2.12.0
       prettier: 3.5.3
       sass-formatter: 0.7.9
+
+  prettier-plugin-css-order@2.1.2(postcss@8.5.3)(prettier@3.5.3):
+    dependencies:
+      css-declaration-sorter: 7.2.0(postcss@8.5.3)
+      postcss-less: 6.0.0(postcss@8.5.3)
+      postcss-scss: 4.0.9(postcss@8.5.3)
+      prettier: 3.5.3
+    transitivePeerDependencies:
+      - postcss
 
   prettier@3.5.3: {}
 

@@ -8,10 +8,10 @@
         "build": "pnpm run prebuild && astro build",
         "preview": "pnpm run prebuild && astro preview",
         "astro": "astro",
-        "lint": "biome check --formatter-enabled false src",
-        "lint:fix": "biome check --formatter-enabled false --write src",
-        "format": "prettier --check src && biome format src",
-        "format:fix": "prettier --write src && biome format --write src"
+        "lint": "biome check --formatter-enabled false src scripts blog",
+        "lint:fix": "biome check --formatter-enabled false --write src scripts blog",
+        "format": "prettier --check src && biome format src scripts blog",
+        "format:fix": "prettier --write src && biome format --write src scripts blog"
     },
     "packageManager": "pnpm@10.11.0",
     "dependencies": {
@@ -19,13 +19,17 @@
     },
     "devDependencies": {
         "@biomejs/biome": "1.9.4",
+        "@richardtowers/remark-abbr": "1.1.5",
+        "@syntect/node": "0.0.4",
         "@types/node": "22.15.23",
         "github-slugger": "2.0.0",
         "mdast": "3.0.0",
         "mdast-util-to-string": "4.0.0",
         "prettier": "3.5.3",
         "prettier-plugin-astro": "0.14.1",
+        "prettier-plugin-css-order": "2.1.2",
         "typescript": "5.8.3",
+        "unified": "11.0.5",
         "unist-util-visit": "5.0.0"
     }
 }

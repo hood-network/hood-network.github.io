@@ -50,8 +50,8 @@ const authorList = authorEntries.map(a => a.data);
 
 <style>
     main {
-        max-width: 900px;
         width: 100%;
+        max-width: 900px;
     }
 
     .pre-content {
@@ -85,19 +85,19 @@ const authorList = authorEntries.map(a => a.data);
         margin: 1em 0;
     }
 
-    a[data-wraps="heading"] {
+    a[data-hn-wraps="heading"] {
         color: inherit;
         text-decoration: none;
     }
 
     hr {
+        display: block;
+        margin: 1em 0;
         border: 0;
         border-top: 1px solid var(--hn-sys-color-outline-variant);
+        padding: 0;
         width: 100%;
         height: 1px;
-        margin: 1em 0;
-        padding: 0;
-        display: block;
     }
 
     ol,
@@ -106,18 +106,18 @@ const authorList = authorEntries.map(a => a.data);
     }
 
     ul.contains-task-list {
-        list-style-type: none;
         padding-left: 1em;
+        list-style-type: none;
     }
 
     li.task-list-item > input[type="checkbox"] {
         display: inline-block;
-        margin-right: 0.5em;
+        vertical-align: middle;
         translate: 0 -2px;
+        margin-right: 0.5em;
+        border-radius: 2px;
         width: 1em;
         height: 1em;
-        border-radius: 2px;
-        vertical-align: middle;
     }
 
     img {
@@ -128,42 +128,57 @@ const authorList = authorEntries.map(a => a.data);
         margin: 1em 0;
     }
 
-    code[data-code="inline"] {
-        padding: 0.25em 0.5em;
+    code[data-hn-code-type="inline"] {
+        border: 1px solid var(--hn-sys-color-outline);
         border-radius: 0.5em;
         background-color: var(--hn-sys-color-accent);
-        border: 1px solid var(--hn-sys-color-outline);
+        padding: 0.25em 0.5em;
+        line-height: 2;
+    }
+
+    code[data-hn-code-type="block"] {
+        display: block;
+        position: relative;
+        width: 100%;
+    }
+
+    code[data-hn-code-type="block"]::before {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        content: attr(data-hn-code-language);
     }
 
     pre {
         box-sizing: border-box;
         margin: 1em 0;
-        padding: 1em;
-        width: 100%;
+        border: 1px solid var(--hn-sys-color-outline);
         border-radius: 0.5em;
         background-color: var(--hn-sys-color-accent) !important;
-        border: 1px solid var(--hn-sys-color-outline);
+        padding: 1em;
+        width: 100%;
     }
 
     blockquote {
-        padding-left: 1em;
         border-left: 4px solid var(--hn-sys-color-on-background);
+        padding-left: 1em;
     }
 
-    div[data-wraps="table"] {
+    div[data-hn-wraps="table"] {
         margin: 1em 0;
-        min-width: 100%;
-        width: 100%;
-        border-radius: 0.5em;
         border: 1px solid var(--hn-sys-color-outline);
+        border-radius: 0.5em;
+        width: 100%;
+        min-width: 100%;
         overflow-x: auto;
         scrollbar-width: thin;
     }
 
     table {
+        border-collapse: collapse;
         width: 100%;
         min-width: fit-content;
-        border-collapse: collapse;
     }
 
     table thead {

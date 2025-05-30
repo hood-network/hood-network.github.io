@@ -30,21 +30,20 @@ const { title, description } = Astro.props;
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
         }
 
         main {
             max-width: 390px;
             min-height: 180px;
-            padding: 30px 1em 15px;
         }
 
         header {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
         }
 
         .blog-link {

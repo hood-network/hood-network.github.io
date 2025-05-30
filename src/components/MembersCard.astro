@@ -25,28 +25,28 @@ import { members } from "@authors";
 </Card>
 <style>
     .card-deco {
-        bottom: -0.25em;
-        font-size: 15em;
-        opacity: 0.2;
         position: absolute;
         right: -0.25em;
-        user-select: none;
+        bottom: -0.25em;
+        opacity: 0.2;
         width: 1.5em;
+        font-size: 15em;
+        user-select: none;
     }
 
     .avatar-row {
         display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
         gap: 1em;
         margin-top: 10px;
-        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
     }
 
     .avatar-row > a {
         aspect-ratio: 1/1;
+        width: auto;
         height: auto;
         overflow: hidden;
         text-decoration: none;
-        width: auto;
     }
 
     .avatar-row > a:has(img[alt]) {
@@ -54,7 +54,7 @@ import { members } from "@authors";
     }
 
     .avatar-row > a > img {
-        height: 100%;
         width: 100%;
+        height: 100%;
     }
 </style>

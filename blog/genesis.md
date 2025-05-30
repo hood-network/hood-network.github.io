@@ -34,6 +34,13 @@ authors: [arhsm, vocane]
 - **_Bold and italic text_**
 - ~~Strikethrough text~~
 
+## Custom Formatting Syntax
+
+- Subscripts: H~2~O `H~2~O`
+- Superscripts: O(n^2^) `O(n^2^)`
+- Mark: ==marked== `==mark==`
+- Abbreviations: HTML (defined in footnotes: `*[HTML]: Hyper Text Markup Language`)
+
 ## Lists
 
 ### Unordered Lists
@@ -75,11 +82,12 @@ authors: [arhsm, vocane]
 
 ### Inline Code
 
-Here is some inline `print("Hello, world!")` code
+Here is some inline `py print("Hello, world!")` code and this is
+`not highlighted` but this is `JavaScript console.log("hii!!")`
 
 ### Code Blocks
 
-```python
+```py
 def greet(name):
     print(f"Hello, {name}!")
 
@@ -88,7 +96,7 @@ greet("World")
 
 This codeblock is expandable to save on space.
 
-```javascript
+```js
 function sayHello(name) {
     console.log("Hello, " + name + "!");
 }
@@ -153,4 +161,7 @@ This is another line.
 ## Emojis
 
 😀 😁 😂 😃 😄 😅 😆 😇 😉 😊
+
+
+*[HTML]: Hyper Text Markup Language
 

@@ -1,5 +1,8 @@
+import remarkAbbr from "@richardtowers/remark-abbr";
 import { defineConfig } from "astro/config";
+
 import transform from "./src/plugins/mdTranform";
+import { remarkMark, remarkSubSup } from "./src/plugins/remark";
 
 export default defineConfig({
     site: "https://hoodnet.work",
@@ -10,6 +13,6 @@ export default defineConfig({
         gfm: true,
         smartypants: true,
         syntaxHighlight: false,
-        remarkPlugins: [transform],
+        remarkPlugins: [remarkAbbr, remarkSubSup, remarkMark, transform],
     },
 });
