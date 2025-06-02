@@ -26,8 +26,10 @@ const { title } = Astro.props;
     }
 
     .card-wrapper {
-        border-radius: 8px;
-        background: var(--hn-sys-grad-card);
+        --hn-local-shape: var(--hn-sys-shape-medium);
+
+        border-radius: var(--hn-local-shape);
+        background: var(--hn-sys-color-outline);
         padding: 1px;
     }
 
@@ -35,10 +37,10 @@ const { title } = Astro.props;
         display: flex;
         position: relative;
         flex-direction: column;
-        gap: 10px;
+        gap: var(--hn-sys-shape-small);
         border-radius: inherit;
-        background-color: var(--hn-sys-color-accent);
-        padding: 24px;
+        background-color: var(--hn-sys-color-surface-container);
+        padding: calc(2 * var(--hn-local-shape));
     }
 
     .section {
@@ -47,6 +49,9 @@ const { title } = Astro.props;
 
     .section > h1 {
         margin: 0;
-        font-family: var(--hn-ref-font-brand);
+        margin-bottom: var(--hn-sys-shape-small);
+        font-size: var(--hn-sys-typescale-display-medium-size);
+        line-height: var(--hn-sys-typescale-display-medium-line-height);
+        font-family: var(--hn-sys-typescale-display-medium-font);
     }
 </style>

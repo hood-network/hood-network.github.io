@@ -38,10 +38,9 @@ import { members } from "@authors";
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
         gap: 1em;
-        margin-top: 10px;
     }
 
-    .avatar-row > a {
+    a {
         aspect-ratio: 1/1;
         width: auto;
         height: auto;
@@ -49,11 +48,11 @@ import { members } from "@authors";
         text-decoration: none;
     }
 
-    .avatar-row > a:has(img[alt]) {
-        border-radius: 100%;
+    a:has(img[alt]) {
+        border-radius: var(--hn-sys-shape-full);
     }
 
-    .avatar-row > a > img {
+    a > img {
         width: 100%;
         height: 100%;
     }

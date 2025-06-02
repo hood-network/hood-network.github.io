@@ -7,14 +7,19 @@ import Base from "./Base.astro";
 interface Props {
     title: string;
     description: string;
+    banner?: string;
     fragments: PathFragment[];
     children: any;
 }
 
-const { title, description, fragments } = Astro.props;
+const { title, description, banner, fragments } = Astro.props;
 ---
 
-<Base title={`hood network · ${title}`} description={description}>
+<Base
+    title={`hood network · ${title}`}
+    description={description}
+    banner={banner}
+>
     <NavigationBar {fragments} />
     <slot />
 </Base>
@@ -42,7 +47,16 @@ const { title, description, fragments } = Astro.props;
         }
     }
 
-    :global(h1, h2, h3, h4, h5, h6) {
-        font-family: var(--hn-ref-font-heading);
+    :global(h1) {
+        font-weight: var(--hn-sys-typescale-heading-large-weight);
+        font-size: var(--hn-sys-typescale-heading-large-size);
+        line-height: var(--hn-sys-typescale-heading-large-line-height);
+        font-family: var(--hn-sys-typescale-heading-large-font);
+    }
+
+    :global(h2, h3, h4, h5, h6) {
+        font-weight: var(--hn-sys-typescale-heading-medium-weight);
+        line-height: var(--hn-sys-typescale-heading-medium-line-height);
+        font-family: var(--hn-sys-typescale-heading-medium-font);
     }
 </style>

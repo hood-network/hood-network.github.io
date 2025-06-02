@@ -1,11 +1,32 @@
 ---
+import "hn:design.css";
+
 interface Props {
     title: string;
     description: string;
+    banner?: string;
     children: any;
 }
 
-const { title, description } = Astro.props;
+const { title, description, banner = "/static/banner.webp" } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const fonts = {
+    "Dela Gothic One": null,
+    Roboto: null,
+    Figtree: "ital,wght@0,600..700;1,600..700",
+    "JetBrains Mono": "ital@0;1",
+};
+
+const fontURL = new URL("https://fonts.googleapis.com/css2");
+
+for (const [font, data] of Object.entries(fonts)) {
+    fontURL.searchParams.append(
+        "family",
+        `${font}${data != null ? `:${data}` : ""}`,
+    );
+}
 ---
 
 <html lang="en">
@@ -18,12 +39,11 @@ const { title, description } = Astro.props;
 
         <title>{title}</title>
 
+        <link rel="canonical" href={canonicalURL} />
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Roboto&family=Figtree:ital,wght@0,700;1,700&display=swap"
-            rel="stylesheet"
-        />
+        <link href={fontURL.href} rel="stylesheet" />
 
         <link rel="preconnect" href="https://github.com" crossorigin />
         <link rel="preconnect" href="https://bignutty.gitlab.io" crossorigin />
@@ -32,12 +52,16 @@ const { title, description } = Astro.props;
 
         <meta content="website" property="og:type" />
 
+        <meta property="og:url" content={canonicalURL} />
+        <meta property="og:site_name" content="hood network" />
         <meta content={title} property="og:title" />
         <meta content={description} property="og:description" />
+        <meta content={banner} property="og:image" />
         <meta content={description} name="description" />
 
         <meta content={title} property="twitter:title" />
         <meta content={description} property="twitter:description" />
+        <meta content="summary_large_image" name="twitter:card" />
 
         <meta content="#ff6868" name="theme-color" />
 
@@ -49,46 +73,6 @@ const { title, description } = Astro.props;
 </html>
 
 <style>
-    :root {
-        --hn-ref-font-brand: "Dela Gothic One", sans-serif;
-        --hn-ref-font-heading: "Figtree", sans-serif;
-        --hn-ref-font-plain: "Roboto", sans-serif;
-
-        --hn-ref-palette-brand: #ff6868;
-
-        --hn-sys-color-accent: #3c3f44;
-
-        --hn-sys-color-outline: #545659;
-
-        --hn-sys-color-surface-variant: #303236;
-        --hn-sys-color-outline-variant: #5a5c60;
-
-        --hn-sys-color-on-background: #fff;
-        --hn-sys-grad-background: linear-gradient(0deg, #181b1e, #23272b);
-
-        --hn-sys-grad-card: linear-gradient(to bottom right, #5a5c60, #3c4044);
-    }
-
-    @media (prefers-color-scheme: light) {
-        :root {
-            --hn-sys-color-accent: #f1f2f3;
-
-            --hn-sys-color-outline: #c9cbcf;
-
-            --hn-sys-color-surface-variant: #f1f2f3;
-            --hn-sys-color-outline-variant: #23272b;
-
-            --hn-sys-color-on-background: #404040;
-            --hn-sys-grad-background: linear-gradient(0deg, #ffffff, #f9fafb);
-
-            --hn-sys-grad-card: linear-gradient(
-                to bottom right,
-                #d6d8db,
-                #e4e5e7
-            );
-        }
-    }
-
     :global(*) {
         box-sizing: border-box;
         margin: 0;
@@ -101,10 +85,12 @@ const { title, description } = Astro.props;
     }
 
     body {
-        background: var(--hn-sys-grad-background);
+        background: var(--hn-sys-color-background);
         min-height: 100vh;
         color: var(--hn-sys-color-on-background);
-        font-family: var(--hn-ref-font-plain);
+        font-size: var(--hn-sys-typescale-body-medium-size);
+        line-height: var(--hn-sys-typescale-body-medium-line-height);
+        font-family: var(--hn-sys-typescale-body-medium-font);
     }
 
     @supports (min-height: 100cqh) {

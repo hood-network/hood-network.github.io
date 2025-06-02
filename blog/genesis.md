@@ -88,8 +88,10 @@ Here is some inline `py print("Hello, world!")` code and this is
 ### Code Blocks
 
 ```py
+# hii
+
 def greet(name):
-    print(f"Hello, {name}!")
+    print(f"Hello, {name}!", 123)
 
 greet("World")
 ```
@@ -108,6 +110,26 @@ function foo(name) {
 }
 
 foo("bar");
+
+null
+```
+
+```rs
+// this is a comment
+
+use std::mem::transmute;
+
+const STR: &str = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+
+fn main() {
+    let mut i: usize = 0;
+
+    i += 1;
+
+    _ = unsafe {
+        mem::transmute::<usize, isize>(i)
+    };
+}
 ```
 
 ```

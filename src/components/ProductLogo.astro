@@ -10,7 +10,7 @@ import Logo from "@components/svgs/Logo.svg";
     .product-logo {
         display: flex;
         align-items: center;
-        gap: 5px;
+        gap: var(--hn-sys-shape-small);
         user-select: none;
     }
 
@@ -33,6 +33,7 @@ import Logo from "@components/svgs/Logo.svg";
     }
 
     .product-logo > span {
-        font-family: var(--hn-ref-font-brand);
+        line-height: var(--hn-sys-typescale-display-medium-line-height);
+        font-family: var(--hn-sys-typescale-display-medium-font);
     }
 </style>

@@ -1,23 +1,17 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import Card from "./Card.astro";
 
 type Props = CollectionEntry<"blog">;
 
 const {
     id,
-    data: { title, description, date },
+    data: { title, description, date, banner },
 } = Astro.props;
 ---
 
 <a href={`/blog/${id}`}>
     <div class="card">
-        <img
-            src="/static/av/arhsm.256.png"
-            slot="pre-section"
-            alt="post banner"
-            class="banner"
-        />
+        <img src={banner} slot="pre-section" alt="post banner" class="banner" />
 
         <div class="section">
             <span class="publish-date">
@@ -39,14 +33,17 @@ const {
     }
 
     .card {
+        --hn-local-shape: var(--hn-sys-shape-medium);
+
         display: flex;
         position: relative;
         flex-direction: column;
-        gap: 10px;
+        gap: calc(2 * var(--hn-local-shape));
         box-sizing: border-box;
-        border-radius: 24px;
-        background-color: var(--hn-sys-color-accent);
-        padding: 24px;
+        border: 1px solid var(--hn-sys-color-outline-variant);
+        border-radius: var(--hn-local-shape);
+        background-color: var(--hn-sys-color-surface);
+        padding: calc(2 * var(--hn-local-shape));
         width: 100%;
         overflow: hidden;
     }
@@ -56,19 +53,19 @@ const {
     }
 
     .line-clamp {
-        --line-clamp: 1;
+        --hn-local-line-clamp: 1;
 
         display: -webkit-box;
-        -webkit-line-clamp: var(--line-clamp);
+        -webkit-line-clamp: var(--hn-local-line-clamp);
         -webkit-box-orient: vertical;
-        line-clamp: var(--line-clamp);
+        line-clamp: var(--hn-local-line-clamp);
         overflow: hidden;
         text-overflow: ellipsis;
     }
 
     .section > h1 {
-        margin: 0.5em 0;
-        margin-top: 0.2em;
+        margin-top: var(--hn-sys-shape-small);
+        margin-bottom: var(--hn-sys-shape-medium);
     }
 
     @media (max-width: 600px) {
@@ -78,15 +75,10 @@ const {
     }
 
     .banner {
-        /* position: absolute;
-        top: 0;
-        left: 0; */
-        margin: 0 -24px;
-        margin-top: -24px;
-        margin-bottom: 10px;
-        border-bottom-right-radius: inherit;
-        border-bottom-left-radius: inherit;
-        height: 150px;
+        margin: 0 calc(-2 * var(--hn-local-shape));
+        margin-top: calc(-2 * var(--hn-local-shape));
+        aspect-ratio: 2/1;
+        width: calc(100% + (4 * var(--hn-local-shape)));
         object-fit: cover;
     }
 </style>
