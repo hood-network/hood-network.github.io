@@ -50,7 +50,7 @@ export interface DesignTokens {
 
 export interface SyntectStyle {
     scopes: string[];
-    exclude?: (string | undefined)[];
+    exclude?: (string | string[] | undefined)[];
     color: ReturnType<typeof themed> | string;
     fontStyle?: "bold" | "italic";
 }
@@ -243,22 +243,26 @@ class DesignSerializer {
                 style.color,
             );
 
-            const selectors = style.scopes.map(scope =>
-                scope
+            const selectors = style.scopes.map((scope, index) => {
+                const base = scope
                     .split(".")
-                    .map((part, index) => {
-                        const base = `.${EXTERNAL_SYNTECT}${part}`;
-                        const exclude = style.exclude?.[index]
-                            ?.split(".")
-                            .map(part => `.${EXTERNAL_SYNTECT}${part}`)
-                            .join("");
+                    .map(part => `.${EXTERNAL_SYNTECT}${part}`)
+                    .join("");
 
-                        const not = exclude != null ? `:not(${exclude})` : "";
+                const exclude = style.exclude?.[index];
+                const not =
+                    (typeof exclude === "string" ? [exclude] : exclude)
+                        ?.map(
+                            scope =>
+                                `:not(${scope
+                                    .split(".")
+                                    .map(part => `.${EXTERNAL_SYNTECT}${part}`)
+                                    .join("")})`,
+                        )
+                        .join("") ?? "";
 
-                        return `${base}${not}`;
-                    })
-                    .join(""),
-            );
+                return `${base}${not}`;
+            });
             const rule = this.createRule(selectors, []);
 
             rule.properties.color = ref(`sys.color.external.syntect.${token}`);

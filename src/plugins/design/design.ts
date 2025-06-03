@@ -71,42 +71,61 @@ const design = new DesignBuilder()
         extraExtraLarge: "48px",
         full: "9999px",
     })
-    .syntect({
-        comment: {
-            scopes: ["comment", "punctuation.comment"],
-            color: "red",
-            fontStyle: "italic",
+    .syntect(
+        // this is adopted from the rose-pine theme for typst
+        //
+        // credits to original authors:
+        // https://github.com/rose-pine/typst/tree/main
+        //
+        // commit hash: 1ea2d2eb1c3ae0c136e23888cc4c224a6de8224f
+        {
+            comment: {
+                scopes: ["comment"],
+                color: themed("#797593", "#908caa"),
+                fontStyle: "italic",
+            },
+            string: {
+                scopes: ["string", "variable.parameter"],
+                color: themed("#ea9d34", "#f6c177"),
+            },
+            numeric: {
+                scopes: [
+                    "constant.numeric",
+                    "constant.language",
+                    "constant.character",
+                    "constant.other",
+                ],
+                color: themed("#907aa9", "#c4a7e7"),
+            },
+            variable: {
+                scopes: ["variable"],
+                color: themed("#d7827e", "#ea9a97"),
+            },
+            keyword: {
+                scopes: ["keyword", "storage", "entity.name.tag"],
+                color: themed("#b4637a", "#eb6f92"),
+            },
+            type: {
+                scopes: [
+                    "storage.type",
+                    "support.function",
+                    "support.constant",
+                    "support.type",
+                    "support.class",
+                ],
+                color: themed("#56949f", "#9ccfd8"),
+            },
+            class: {
+                scopes: [
+                    "entity.name.class",
+                    "entity.other.inherited-class",
+                    "entity.name.function",
+                    "entity.other.attribute-name",
+                ],
+                color: themed("#286983", "#3e8fb0"),
+            },
         },
-        numeric: {
-            scopes: ["constant.numeric"],
-            color: "red",
-        },
-        string: {
-            scopes: ["string"],
-            color: "red",
-        },
-        builtins: {
-            scopes: ["constant.language"],
-            color: "red",
-        },
-        escape: {
-            scopes: ["constant.escape"],
-            color: "red",
-        },
-        placeholder: {
-            scopes: ["constant.placeholder"],
-            color: "red",
-        },
-        constant: {
-            scopes: ["constant.other"],
-            color: "red",
-        },
-        keyword: {
-            scopes: ["keyword"],
-            exclude: ["operator"],
-            color: "red",
-        },
-    })
+    )
     .build();
 
 export default design;

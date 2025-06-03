@@ -126,9 +126,19 @@ function foo(name) {
     console.log("Hello, " + name + "!");
 }
 
-foo("bar");
+foo(`bar`);
 
 null
+```
+
+```c
+#include <stdio.h>
+
+int main() {
+    printf("%i", 123);
+
+    return 0;
+}
 ```
 
 ```rs
@@ -136,7 +146,7 @@ null
 
 use std::mem::transmute;
 
-const STR: &str = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+const STR: &str = "\u{200b}aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 
 fn main() {
     let mut i: usize = 0;
@@ -147,6 +157,12 @@ fn main() {
         mem::transmute::<usize, isize>(i)
     };
 }
+```
+
+```md
+# Heading
+
+<span>hi</span>
 ```
 
 ```
