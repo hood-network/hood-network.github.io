@@ -13,8 +13,9 @@
         "format": "prettier --check src && biome format src scripts blog",
         "format:fix": "prettier --write src && biome format --write src scripts blog"
     },
-    "packageManager": "pnpm@10.11.0",
+    "packageManager": "pnpm@10.11.1",
     "dependencies": {
+        "@types/mdast": "^4.0.4",
         "astro": "5.8.0"
     },
     "devDependencies": {
@@ -23,7 +24,6 @@
         "@syntect/node": "0.0.4",
         "@types/node": "22.15.23",
         "github-slugger": "2.0.0",
-        "mdast": "3.0.0",
         "mdast-util-to-string": "4.0.0",
         "murmurhash": "^2.0.1",
         "prettier": "3.5.3",
