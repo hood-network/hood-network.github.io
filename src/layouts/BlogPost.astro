@@ -9,11 +9,19 @@ type Props = CollectionEntry<"blog">;
 
 const {
     id,
-    data: { title, description, authors, banner },
+    data: { title, description, authors, banner, date },
 } = Astro.props;
 
 const authorEntries = await getEntries(authors);
 const authorList = authorEntries.map(a => a.data);
+
+const formatter = new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "2-digit",
+    year: "numeric",
+});
+
+const formattedDate = formatter.format(date);
 ---
 
 <BlogBase
@@ -33,10 +41,13 @@ const authorList = authorEntries.map(a => a.data);
 >
     <main>
         <div class="pre-content">
-            <img src={banner} alt="post banner" class="banner" />
-            <h1>{title}</h1>
-            <span
-                >written by {
+            <img src={banner} alt="post banner" class="post-banner" />
+            <div class="post-heading">
+                <span class="post-date">{formattedDate}</span>
+                <h1 class="post-title">{title}</h1>
+            </div>
+            <span class="post-authors">
+                {
                     authorList.map(author => {
                         return <Author {...author} />;
                     })
@@ -65,18 +76,25 @@ const authorList = authorEntries.map(a => a.data);
         margin-bottom: var(--hn-sys-shape-large);
     }
 
-    .pre-content > .banner {
+    .post-banner {
         margin-bottom: var(--hn-local-shape);
         border-radius: var(--hn-sys-shape-medium);
     }
 
-    .pre-content > h1 {
+    .post-heading {
+        display: flex;
+        flex-direction: column;
+        gap: var(--hn-sys-shape-small);
+    }
+
+    .post-title {
         margin: 0;
         font-size: 2.5em;
     }
 
-    .pre-content > span {
+    .post-authors {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         gap: var(--hn-local-shape);
     }

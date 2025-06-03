@@ -15,7 +15,24 @@ description: |
   spam spam spam spam spam spam spam spam spam
   spam spam spam spam spam spam spam spam spam
 date: 17 May 2025 21:00:00 GMT+0900
-authors: [arhsm, vocane]
+authors:
+  - megumin
+  - cynthia
+  - arilien
+  - amia
+  - arhsm
+  - bignutty
+  - dolfies
+  - dydestroyer
+  - dziurwa
+  - haruka
+  - marsh
+  - puhbu
+  - vocane
+  - 11pixels
+  - eva
+  - jay
+  - not-the-neller-man
 ---
 
 ## Headings
@@ -190,8 +207,6 @@ This is some text[^1l] with a footnote.[^1]
 
 Link References.[^1l]
 
-Multi-Link References.[^2l]
-
 This refers to number two.[^2]
 
 ---
@@ -200,8 +215,6 @@ This refers to number two.[^2]
 
 [^1l]:[This is a Link Reference](https://google.com)
 
-
-[^2l]:[{"domain_title":"Discord","title":"Discord - Group Chat That’s All Fun & Games","description":"Discord is great for playing games and chilling with friends, or even building a worldwide community. Customize your own space to talk, play, and hang out."}](https://discord.com)[{"domain_title":"Example","title":"Example Site","description":""}](https://example.com)[{"domain_title":"Wikipedia","title":"Otter","description":"Otters are carnivorous mammals in the subfamily Lutrinae. The 13 extant otter species are all semiaquatic, aquatic, or marine. Lutrinae is a branch of the Mustelidae family, which includes weasels, badgers, mink, and wolverines, among other animals. Otters' habitats include dens known as holts or couches, with their social structure described by..."}](https://en.wikipedia.org/wiki/Otter)[{"domain_title":"Gemini","title":"Gemini - Chat to supercharge your ideas","description":"Bard is now Gemini. Get help with writing, planning, learning, and more from Google AI."}](https://gemini.google.com)
 
 [^1]:## Hello World
 

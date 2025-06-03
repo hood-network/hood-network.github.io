@@ -7,20 +7,32 @@ const {
     id,
     data: { title, description, date, banner },
 } = Astro.props;
+
+const formatter = new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "2-digit",
+    year: "numeric",
+});
+
+const formattedDate = formatter.format(date);
 ---
 
 <a href={`/blog/${id}`}>
     <div class="card">
-        <img src={banner} slot="pre-section" alt="post banner" class="banner" />
+        <img
+            src={banner}
+            slot="pre-section"
+            alt="post banner"
+            class="post-banner"
+        />
 
         <div class="section">
-            <span class="publish-date">
-                {date.getMonth()}.{date.getDate()}.{date.getFullYear()}
-            </span>
+            <div class="post-heading">
+                <span class="post-date">{formattedDate}</span>
+                <h1 class="post-title line-clamp">{title}</h1>
+            </div>
 
-            <h1 class="line-clamp">{title}</h1>
-
-            <p class="description line-clamp">
+            <p class="post-description line-clamp">
                 {description}
             </p>
         </div>
@@ -34,22 +46,26 @@ const {
 
     .card {
         --hn-local-shape: var(--hn-sys-shape-medium);
+        --hn-local-padding: calc(2 * var(--hn-local-shape));
 
         display: flex;
         position: relative;
         flex-direction: column;
-        gap: calc(2 * var(--hn-local-shape));
+        gap: var(--hn-local-padding);
         box-sizing: border-box;
         border: 1px solid var(--hn-sys-color-outline-variant);
         border-radius: var(--hn-local-shape);
         background-color: var(--hn-sys-color-surface);
-        padding: calc(2 * var(--hn-local-shape));
+        padding: var(--hn-local-padding);
         width: 100%;
         overflow: hidden;
     }
 
     .section {
+        display: flex;
         position: relative;
+        flex-direction: column;
+        gap: var(--hn-local-padding);
     }
 
     .line-clamp {
@@ -63,9 +79,10 @@ const {
         text-overflow: ellipsis;
     }
 
-    .section > h1 {
-        margin-top: var(--hn-sys-shape-small);
-        margin-bottom: var(--hn-sys-shape-medium);
+    .post-heading {
+        display: flex;
+        flex-direction: column;
+        gap: var(--hn-sys-shape-small);
     }
 
     @media (max-width: 600px) {
@@ -74,11 +91,11 @@ const {
         }
     }
 
-    .banner {
-        margin: 0 calc(-2 * var(--hn-local-shape));
-        margin-top: calc(-2 * var(--hn-local-shape));
+    .post-banner {
+        margin: 0 calc(-1 * var(--hn-local-padding));
+        margin-top: calc(-1 * var(--hn-local-padding));
         aspect-ratio: 2/1;
-        width: calc(100% + (4 * var(--hn-local-shape)));
+        width: calc(100% + (2 * var(--hn-local-padding)));
         object-fit: cover;
     }
 </style>
