@@ -15,7 +15,24 @@ description: |
   spam spam spam spam spam spam spam spam spam
   spam spam spam spam spam spam spam spam spam
 date: 17 May 2025 21:00:00 GMT+0900
-authors: [arhsm, vocane]
+authors:
+  - megumin
+  - cynthia
+  - arilien
+  - amia
+  - arhsm
+  - bignutty
+  - dolfies
+  - dydestroyer
+  - dziurwa
+  - haruka
+  - marsh
+  - puhbu
+  - vocane
+  - 11pixels
+  - eva
+  - jay
+  - not-the-neller-man
 ---
 
 ## Headings
@@ -88,8 +105,10 @@ Here is some inline `py print("Hello, world!")` code and this is
 ### Code Blocks
 
 ```py
+# hii
+
 def greet(name):
-    print(f"Hello, {name}!")
+    print(f"Hello, {name}!", 123)
 
 greet("World")
 ```
@@ -107,7 +126,43 @@ function foo(name) {
     console.log("Hello, " + name + "!");
 }
 
-foo("bar");
+foo(`bar`);
+
+null
+```
+
+```c
+#include <stdio.h>
+
+int main() {
+    printf("%i", 123);
+
+    return 0;
+}
+```
+
+```rs
+// this is a comment
+
+use std::mem::transmute;
+
+const STR: &str = "\u{200b}aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+
+fn main() {
+    let mut i: usize = 0;
+
+    i += 1;
+
+    _ = unsafe {
+        mem::transmute::<usize, isize>(i)
+    };
+}
+```
+
+```md
+# Heading
+
+<span>hi</span>
 ```
 
 ```
@@ -162,6 +217,70 @@ This is another line.
 
 😀 😁 😂 😃 😄 😅 😆 😇 😉 😊
 
+## Footnotes
+
+This is some text[^1l] with a footnote.[^1]
+
+Link References.[^1l]
+
+This refers to number two.[^2]
+
+---
 
 *[HTML]: Hyper Text Markup Language
+
+[^1l]:[This is a Link Reference](https://google.com)
+
+
+[^1]:## Hello World
+
+    Paragraph two of the definition.
+
+    > A blockquote with
+    > multiple lines.
+
+    ```js
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    ```
+
+    | Header 1 | Header 2 |
+    | -------- | -------- |
+    | Cell 1   | Cell 2   |
+
+    A `final` paragraph before list.[^2]
+
+    - Item 1
+    - Item 2
+      - Subitem 1
+      - Subitem 2
+
+[^2]: This is Footnote 2. Footnote 2 Depends on technology,[^1l] as well as advanced technology.[^2l]
 

@@ -1,32 +1,38 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import Card from "./Card.astro";
 
 type Props = CollectionEntry<"blog">;
 
 const {
     id,
-    data: { title, description, date },
+    data: { title, description, date, banner },
 } = Astro.props;
+
+const formatter = new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "2-digit",
+    year: "numeric",
+});
+
+const formattedDate = formatter.format(date);
 ---
 
 <a href={`/blog/${id}`}>
     <div class="card">
         <img
-            src="/static/av/arhsm.256.png"
+            src={banner}
             slot="pre-section"
             alt="post banner"
-            class="banner"
+            class="post-banner"
         />
 
         <div class="section">
-            <span class="publish-date">
-                {date.getMonth()}.{date.getDate()}.{date.getFullYear()}
-            </span>
+            <div class="post-heading">
+                <span class="post-date">{formattedDate}</span>
+                <h1 class="post-title line-clamp">{title}</h1>
+            </div>
 
-            <h1 class="line-clamp">{title}</h1>
-
-            <p class="description line-clamp">
+            <p class="post-description line-clamp">
                 {description}
             </p>
         </div>
@@ -39,36 +45,44 @@ const {
     }
 
     .card {
+        --hn-local-shape: var(--hn-sys-shape-medium);
+        --hn-local-padding: calc(2 * var(--hn-local-shape));
+
         display: flex;
         position: relative;
         flex-direction: column;
-        gap: 10px;
+        gap: var(--hn-local-padding);
         box-sizing: border-box;
-        border-radius: 24px;
-        background-color: var(--hn-sys-color-accent);
-        padding: 24px;
+        border: 1px solid var(--hn-sys-color-outline-variant);
+        border-radius: var(--hn-local-shape);
+        background-color: var(--hn-sys-color-surface);
+        padding: var(--hn-local-padding);
         width: 100%;
         overflow: hidden;
     }
 
     .section {
+        display: flex;
         position: relative;
+        flex-direction: column;
+        gap: var(--hn-local-padding);
     }
 
     .line-clamp {
-        --line-clamp: 1;
+        --hn-local-line-clamp: 1;
 
         display: -webkit-box;
-        -webkit-line-clamp: var(--line-clamp);
+        -webkit-line-clamp: var(--hn-local-line-clamp);
         -webkit-box-orient: vertical;
-        line-clamp: var(--line-clamp);
+        line-clamp: var(--hn-local-line-clamp);
         overflow: hidden;
         text-overflow: ellipsis;
     }
 
-    .section > h1 {
-        margin: 0.5em 0;
-        margin-top: 0.2em;
+    .post-heading {
+        display: flex;
+        flex-direction: column;
+        gap: var(--hn-sys-shape-small);
     }
 
     @media (max-width: 600px) {
@@ -77,16 +91,11 @@ const {
         }
     }
 
-    .banner {
-        /* position: absolute;
-        top: 0;
-        left: 0; */
-        margin: 0 -24px;
-        margin-top: -24px;
-        margin-bottom: 10px;
-        border-bottom-right-radius: inherit;
-        border-bottom-left-radius: inherit;
-        height: 150px;
+    .post-banner {
+        margin: 0 calc(-1 * var(--hn-local-padding));
+        margin-top: calc(-1 * var(--hn-local-padding));
+        aspect-ratio: 2/1;
+        width: calc(100% + (2 * var(--hn-local-padding)));
         object-fit: cover;
     }
 </style>

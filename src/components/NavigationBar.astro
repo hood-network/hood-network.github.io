@@ -35,8 +35,8 @@ const { fragments } = Astro.props;
         position: sticky;
         top: 2em;
         z-index: 999;
-        border-radius: 24px;
-        background: var(--hn-sys-grad-card);
+        border-radius: var(--hn-sys-shape-full);
+        background: var(--hn-sys-color-outline);
         padding: 1px;
         width: 100%;
     }
@@ -44,10 +44,10 @@ const { fragments } = Astro.props;
     nav > div {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: var(--hn-sys-shape-medium);
         box-sizing: border-box;
         border-radius: inherit;
-        background-color: var(--hn-sys-color-accent);
+        background-color: var(--hn-sys-color-surface);
         padding: 10px 15px;
     }
 
@@ -67,7 +67,8 @@ const { fragments } = Astro.props;
 
         nav :global(.product-logo::after) {
             content: "hn";
-            font-family: var(--hn-ref-font-brand);
+            line-height: var(--hn-sys-typescale-display-medium-line-height);
+            font-family: var(--hn-sys-typescale-display-medium-font);
         }
     }
 </style>

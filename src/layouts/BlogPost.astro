@@ -9,16 +9,25 @@ type Props = CollectionEntry<"blog">;
 
 const {
     id,
-    data: { title, description, authors },
+    data: { title, description, authors, banner, date },
 } = Astro.props;
 
 const authorEntries = await getEntries(authors);
 const authorList = authorEntries.map(a => a.data);
+
+const formatter = new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "2-digit",
+    year: "numeric",
+});
+
+const formattedDate = formatter.format(date);
 ---
 
 <BlogBase
     title={title}
     description={description}
+    banner={banner}
     fragments={[
         {
             path: "/blog",
@@ -32,9 +41,13 @@ const authorList = authorEntries.map(a => a.data);
 >
     <main>
         <div class="pre-content">
-            <h1>{title}</h1>
-            <span
-                >written by {
+            <img src={banner} alt="post banner" class="post-banner" />
+            <div class="post-heading">
+                <span class="post-date">{formattedDate}</span>
+                <h1 class="post-title">{title}</h1>
+            </div>
+            <span class="post-authors">
+                {
                     authorList.map(author => {
                         return <Author {...author} />;
                     })
@@ -55,25 +68,40 @@ const authorList = authorEntries.map(a => a.data);
     }
 
     .pre-content {
+        --hn-local-shape: var(--hn-sys-shape-medium);
+
         display: flex;
         flex-direction: column;
-        gap: 10px;
-        margin-bottom: 2em;
+        gap: var(--hn-local-shape);
+        margin-bottom: var(--hn-sys-shape-large);
     }
 
-    .pre-content h1 {
-        margin: 0;
+    .post-banner {
+        margin-bottom: var(--hn-local-shape);
+        border-radius: var(--hn-sys-shape-medium);
     }
 
-    .pre-content span {
+    .post-heading {
         display: flex;
+        flex-direction: column;
+        gap: var(--hn-sys-shape-small);
+    }
+
+    .post-title {
+        margin: 0;
+        font-size: 2.5em;
+    }
+
+    .post-authors {
+        display: flex;
+        flex-wrap: wrap;
         align-items: center;
-        gap: 10px;
+        gap: var(--hn-local-shape);
     }
 </style>
 <style is:global>
     article h1 {
-        font-size: 2em;
+        font-size: var(--hn-sys-typescale-heading-large-size);
     }
 
     h1,
@@ -82,7 +110,9 @@ const authorList = authorEntries.map(a => a.data);
     h4,
     h5,
     h6 {
-        margin: 1em 0;
+        margin: var(--hn-sys-shape-extra-large) 0;
+        /* padding + header size */
+        scroll-margin-top: calc(4em + 44px);
     }
 
     a[data-hn-wraps="heading"] {
@@ -90,9 +120,17 @@ const authorList = authorEntries.map(a => a.data);
         text-decoration: none;
     }
 
+    mark {
+        border-radius: var(--hn-sys-shape-small);
+        background-color: var(--hn-sys-color-tertiary);
+        padding: var(--hn-sys-shape-extra-small) var(--hn-sys-shape-small);
+        color: var(--hn-sys-color-on-tertiary);
+        line-height: 2.5;
+    }
+
     hr {
         display: block;
-        margin: 1em 0;
+        margin: var(--hn-sys-shape-large) 0;
         border: 0;
         border-top: 1px solid var(--hn-sys-color-outline-variant);
         padding: 0;
@@ -102,11 +140,11 @@ const authorList = authorEntries.map(a => a.data);
 
     ol,
     ul {
-        padding-left: 2em;
+        padding-left: var(--hn-sys-shape-large-increased);
     }
 
     ul.contains-task-list {
-        padding-left: 1em;
+        padding-left: 0;
         list-style-type: none;
     }
 
@@ -128,18 +166,27 @@ const authorList = authorEntries.map(a => a.data);
         margin: 1em 0;
     }
 
+    code {
+        font-size: 0.8em;
+        font-family: var(--hn-ref-typeface-monospace);
+    }
+
     code[data-hn-code-type="inline"] {
-        border: 1px solid var(--hn-sys-color-outline);
-        border-radius: 0.5em;
-        background-color: var(--hn-sys-color-accent);
-        padding: 0.25em 0.5em;
-        line-height: 2;
+        border: 1px solid var(--hn-sys-color-outline-variant);
+        border-radius: var(--hn-sys-shape-small);
+        background-color: var(--hn-sys-color-surface);
+        padding: var(--hn-sys-shape-extra-small) var(--hn-sys-shape-small);
+        line-height: 2.5;
     }
 
     code[data-hn-code-type="block"] {
         display: block;
         position: relative;
         width: 100%;
+        line-break: anywhere;
+        text-wrap: wrap;
+        word-break: break-all;
+        overflow-wrap: break-word;
     }
 
     code[data-hn-code-type="block"]::before {
@@ -151,27 +198,31 @@ const authorList = authorEntries.map(a => a.data);
     }
 
     pre {
+        --hn-local-shape: var(--hn-sys-shape-medium);
+
         box-sizing: border-box;
         margin: 1em 0;
-        border: 1px solid var(--hn-sys-color-outline);
-        border-radius: 0.5em;
-        background-color: var(--hn-sys-color-accent) !important;
-        padding: 1em;
+        border: 1px solid var(--hn-sys-color-outline-variant);
+        border-radius: var(--hn-local-shape);
+        background-color: var(--hn-sys-color-surface) !important;
+        padding: calc(2 * var(--hn-local-shape));
         width: 100%;
     }
 
     blockquote {
-        border-left: 4px solid var(--hn-sys-color-on-background);
+        border-left: 2px solid var(--hn-sys-color-on-background);
         padding-left: 1em;
     }
 
     div[data-hn-wraps="table"] {
+        --hn-local-shape: var(--hn-sys-shape-medium);
+
         margin: 1em 0;
-        border: 1px solid var(--hn-sys-color-outline);
-        border-radius: 0.5em;
+        border: 1px solid var(--hn-sys-color-outline-variant);
+        border-radius: var(--hn-local-shape);
         width: 100%;
         min-width: 100%;
-        overflow-x: auto;
+        overflow: auto;
         scrollbar-width: thin;
     }
 
@@ -182,7 +233,7 @@ const authorList = authorEntries.map(a => a.data);
     }
 
     table thead {
-        background-color: var(--hn-sys-color-surface-variant);
+        background-color: var(--hn-sys-color-surface);
     }
 
     table thead > tr:first-child {
@@ -190,7 +241,7 @@ const authorList = authorEntries.map(a => a.data);
     }
 
     table tr {
-        border-top: 1px solid var(--hn-sys-color-outline);
+        border-top: 1px solid var(--hn-sys-color-outline-variant);
     }
 
     table th:first-child,
@@ -200,7 +251,7 @@ const authorList = authorEntries.map(a => a.data);
 
     table th,
     table td {
-        border-left: 1px solid var(--hn-sys-color-outline);
-        padding: 1em;
+        border-left: 1px solid var(--hn-sys-color-outline-variant);
+        padding: var(--hn-sys-shape-large-increased);
     }
 </style>
