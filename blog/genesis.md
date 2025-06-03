@@ -184,6 +184,74 @@ This is another line.
 
 😀 😁 😂 😃 😄 😅 😆 😇 😉 😊
 
+## Footnotes
+
+This is some text[^1l] with a footnote.[^1]
+
+Link References.[^1l]
+
+Multi-Link References.[^2l]
+
+This refers to number two.[^2]
+
+---
 
 *[HTML]: Hyper Text Markup Language
+
+[^1l]:[This is a Link Reference](https://google.com)
+
+
+[^2l]:[{"domain_title":"Discord","title":"Discord - Group Chat That’s All Fun & Games","description":"Discord is great for playing games and chilling with friends, or even building a worldwide community. Customize your own space to talk, play, and hang out."}](https://discord.com)[{"domain_title":"Example","title":"Example Site","description":""}](https://example.com)[{"domain_title":"Wikipedia","title":"Otter","description":"Otters are carnivorous mammals in the subfamily Lutrinae. The 13 extant otter species are all semiaquatic, aquatic, or marine. Lutrinae is a branch of the Mustelidae family, which includes weasels, badgers, mink, and wolverines, among other animals. Otters' habitats include dens known as holts or couches, with their social structure described by..."}](https://en.wikipedia.org/wiki/Otter)[{"domain_title":"Gemini","title":"Gemini - Chat to supercharge your ideas","description":"Bard is now Gemini. Get help with writing, planning, learning, and more from Google AI."}](https://gemini.google.com)
+
+[^1]:## Hello World
+
+    Paragraph two of the definition.
+
+    > A blockquote with
+    > multiple lines.
+
+    ```js
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    console.log("hello world");
+    ```
+
+    | Header 1 | Header 2 |
+    | -------- | -------- |
+    | Cell 1   | Cell 2   |
+
+    A `final` paragraph before list.[^2]
+
+    - Item 1
+    - Item 2
+      - Subitem 1
+      - Subitem 2
+
+[^2]: This is Footnote 2. Footnote 2 Depends on technology,[^1l] as well as advanced technology.[^2l]
 

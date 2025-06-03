@@ -13,6 +13,17 @@ export default function transform() {
 function mutate(tree: Root) {
     visit(tree, (node, index, parent) => {
         switch (node.type) {
+            case "abbrDefinition":
+                if (parent == null || index == null) {
+                    console.warn(
+                        `\`${node.type}\` found without any parent and/or index!`,
+                    );
+                    return;
+                }
+
+                parent.children.splice(index, 1);
+
+                return index;
             case "code":
                 extendDataset(node, { "data-hn-code-type": "block" });
                 tryHighlight(node, node.lang);
