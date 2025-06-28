@@ -84,6 +84,11 @@ export const members: Member[] = [
         url: "https://github.com/jay-taelien",
     },
     {
+        name: "Chaussette",
+        avatar: "/static/av/chaussette.256.png",
+        url: "https://dfr.gg",
+    },
+    {
         name: "not the neller man",
         avatar: "/static/av/nellerman.256.png",
         url: "https://nelly.tools",
