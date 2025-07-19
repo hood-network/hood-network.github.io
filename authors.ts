@@ -16,7 +16,7 @@ export const members: Member[] = [
     {
         name: "arilien",
         avatar: "/static/av/arilien.256.png",
-        url: "https://arilien.rip",
+        url: "https://github.com/configari",
     },
     {
         name: "amia",
