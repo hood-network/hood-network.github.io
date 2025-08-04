@@ -79,6 +79,11 @@ export const members: Member[] = [
         url: "https://kibty.town",
     },
     {
+        name: "Yui",
+        avatar: "https://github.com/yuifm.png",
+        url: "https://yui.fm",
+    },
+    {
         name: "Jay",
         avatar: "https://avatars.githubusercontent.com/u/79278716?v=4",
         url: "https://github.com/jay-taelien",
