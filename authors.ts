@@ -94,6 +94,11 @@ export const members: Member[] = [
         url: "https://dfr.gg",
     },
     {
+        name: "Chloe",
+        avatar: "https://github.com/chloecinders.png",
+        url: "https://chloecinders.com",
+    },
+    {
         name: "not the neller man",
         avatar: "/static/av/nellerman.256.png",
         url: "https://nelly.tools",
