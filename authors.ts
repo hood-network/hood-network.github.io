@@ -60,7 +60,7 @@ export const members: Member[] = [
     },
     {
         name: "puhbu",
-        avatar: "https://github.com/puhbu.png",
+        avatar: "https://github.com/puhboo.png",
         url: "https://http.cat/404",
     },
     {
