@@ -31,7 +31,7 @@ export const members: Member[] = [
     {
         name: "bignutty",
         avatar: "https://bignutty.gitlab.io/webstorage/bnav/latest-256.png",
-        url: "https://bignutty.gitlab.io",
+        url: "https://bignut.zip",
     },
     {
         name: "Dolfies",
