@@ -2,108 +2,52 @@ import type { CollectionEntry } from "astro:content";
 
 type Member = CollectionEntry<"authors">["data"];
 
+// biome-ignore syntax: if the functions split to next lines its inconsistent and ugly
 export const members: Member[] = [
-    {
-        name: "Megumin",
-        avatar: "/static/av/megumin.256.png",
-        url: "https://github.com/meguminsama",
-    },
-    {
-        name: "Cynthia",
-        avatar: "/static/av/cynosphere.256.png",
-        url: "https://c7.pm",
-    },
-    {
-        name: "arilien",
-        avatar: "/static/av/arilien.256.png",
-        url: "https://github.com/configari",
-    },
-    {
-        name: "amia",
-        avatar: "/static/av/amia.256.png",
-        url: "https://github.com/aamiaa",
-    },
-    {
-        name: "arHSM",
-        avatar: "/static/av/arhsm.256.png",
-        url: "https://lost.arhsm.cat",
-    },
-    {
-        name: "bignutty",
-        avatar: "https://bignutty.gitlab.io/webstorage/bnav/latest-256.png",
-        url: "https://bignut.zip",
-    },
-    {
-        name: "Dolfies",
-        avatar: "https://github.com/dolfies.png",
-        url: "https://dolfi.es",
-    },
-    {
-        name: "DyDestroyer",
-        avatar: "/static/av/dydestroyer.256.png",
-        url: "https://github.com/DyDestroyer1027",
-    },
-    {
-        name: "Dziurwa",
-        avatar: "/static/av/dziurwa.256.png",
-        url: "https://github.com/Dziurwa14",
-    },
-    {
-        name: "Haruka",
-        avatar: "/static/av/haruka.256.png",
-        url: "https://shiroko.me",
-    },
-    {
-        name: "marsh",
-        avatar: "https://github.com/marshift.png",
-        url: "https://marsh.zone",
-    },
-    {
-        name: "puhbu",
-        avatar: "https://github.com/puhboo.png",
-        url: "https://http.cat/404",
-    },
-    {
-        name: "Vocane",
-        avatar: ".",
-        url: "https://voc.pet",
-    },
-    {
-        name: "11pixels",
-        avatar: "/static/av/11pixels.256.png",
-        url: "https://xyzenix.github.io",
-    },
-    {
-        name: "eva",
-        avatar: "https://github.com/xyzeva.png",
-        url: "https://kibty.town",
-    },
-    {
-        name: "Yui",
-        avatar: "https://github.com/yuifm.png",
-        url: "https://yui.fm",
-    },
-    {
-        name: "Jay",
-        avatar: "https://avatars.githubusercontent.com/u/79278716?v=4",
-        url: "https://github.com/jay-taelien",
-    },
-    {
-        name: "Chaussette",
-        avatar: "/static/av/chaussette.256.png",
-        url: "https://dfr.gg",
-    },
-    {
-        name: "Chloe",
-        avatar: "https://github.com/chloecinders.png",
-        url: "https://chloecinders.com",
-    },
-    {
-        name: "not the neller man",
-        avatar: "/static/av/nellerman.256.png",
-        url: "https://nelly.tools",
-    },
-];
+    member("11pixels", "/static/av/11pixels.256.png", "https://xyzenix.github.io"),
+
+    member("amia", "/static/av/amia.256.png", "https://github.com/aamiaa"),
+    member("arHSM", "/static/av/arhsm.256.png", "https://lost.arhsm.cat"),
+    member("arilien", "/static/av/arilien.256.png", "https://github.com/configari"),
+
+    member("bignutty", "https://bignutty.gitlab.io/webstorage/bnav/latest-256.png", "https://bignut.zip"),
+
+    member("Chaussette", "/static/av/chaussette.256.png", "https://dfr.gg"),
+    member("Chloe", "https://github.com/chloecinders.png", "https://chloecinders.com"),
+    member("Cynthia", "/static/av/cynosphere.256.png", "https://c7.pm"),
+
+    member("DarkerInk", "/static/av/darkerink.256.png", "https://github.com/Darker-Ink"),
+    member("Dolfies", "https://github.com/dolfies.png", "https://dolfi.es"),
+    member("DyDestroyer", "/static/av/dydestroyer.256.png", "https://github.com/DyDestroyer1027"),
+    member("Dziurwa", "/static/av/dziurwa.256.png", "https://github.com/Dziurwa14"),
+
+    member("eva", "https://github.com/xyzeva.png", "https://kibty.town"),
+
+    member("Haruka", "/static/av/haruka.256.png", "https://shiroko.me"),
+
+    member("Jay", "https://avatars.githubusercontent.com/u/79278716?v=4", "https://github.com/jay-taelien"),
+
+    member("marsh", "https://github.com/marshift.png", "https://marsh.zone"),
+    member("Megumin", "/static/av/megumin.256.png", "https://github.com/meguminsama"),
+
+    member("puhbu", "https://github.com/puhboo.png", "https://http.cat/404"),
+
+    member("Vocane", ".", "https://voc.pet"),
+
+    member("Yui", "https://github.com/yuifm.png", "https://yui.fm"),
+
+    member("not the neller man", "/static/av/nellerman.256.png", "https://nelly.tools"),
+].sort((a, b) => {
+    if (a.name === "not the neller man") {
+        return 9999;
+    }
+
+    return a.name.localeCompare(b.name);
+});
+
+function member(name: string, avatar: string, url: string): Member {
+    return { name, avatar, url }
+}
 
 if (import.meta.main) {
     const { rm, mkdir, writeFile } = await import("node:fs/promises");
