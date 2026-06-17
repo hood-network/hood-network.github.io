@@ -7,7 +7,7 @@ export const members: Member[] = [
     member("11pixels", "/static/av/11pixels.256.png", "https://xyzenix.github.io"),
 
     member("amia", "/static/av/amia.256.png", "https://github.com/aamiaa"),
-    member("arHSM", "/static/av/arhsm.256.png", "https://lost.arhsm.cat"),
+    member("arhsm", "/static/av/arhsm.256.png", "https://lost.arhsm.cat"),
     member("arilien", "/static/av/arilien.256.png", "https://github.com/configari"),
 
     member("bignutty", "https://bignutty.gitlab.io/webstorage/bnav/latest-256.png", "https://bignut.zip"),
@@ -25,7 +25,7 @@ export const members: Member[] = [
 
     member("Haruka", "/static/av/haruka.256.png", "https://shiroko.me"),
 
-    member("Jay", "https://avatars.githubusercontent.com/u/79278716?v=4", "https://github.com/jay-taelien"),
+    member("Jay", "https://github.com/jay-taelien.png", "https://github.com/jay-taelien"),
 
     member("marsh", "https://github.com/marshift.png", "https://marsh.zone"),
     member("Megumin", "/static/av/megumin.256.png", "https://github.com/meguminsama"),
