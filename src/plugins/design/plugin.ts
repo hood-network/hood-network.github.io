@@ -1,4 +1,5 @@
 import { join } from "node:path";
+import { pathToFileURL } from "node:url";
 
 import type { Plugin } from "vite";
 
@@ -22,7 +23,7 @@ export default {
     async load(id) {
         if (!id.startsWith(RESOLVED_VIRTUAL_MODULE_ID)) return;
 
-        const worker = new Worker(join(import.meta.dirname, "./worker.ts"));
+        const worker = new Worker(pathToFileURL(join(import.meta.dirname, "./worker.ts")));
 
         let resolve: (v: string) => void;
         const promise = new Promise<string>(res => {
