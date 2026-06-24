@@ -32,7 +32,7 @@ export const members: Member[] = [
 
     member("puhbu", "https://github.com/puhboo.png", "https://http.cat/404"),
 
-    member("Vocane", ".", "https://voc.pet"),
+    member("voc", "/static/av/voc.256.png", "https://voc.pet"),
 
     member("Yui", "https://github.com/yuifm.png", "https://yui.fm"),
 
