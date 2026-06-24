@@ -28,7 +28,7 @@ authors:
   - haruka
   - marsh
   - puhbu
-  - vocane
+  - voc
   - 11pixels
   - eva
   - jay
