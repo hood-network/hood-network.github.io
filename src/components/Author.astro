@@ -7,38 +7,38 @@ const { name, avatar, url } = Astro.props;
 ---
 
 <a href={url}>
-    <div>
-        <img src={avatar} alt={avatar === "." ? null : name} />
-        {name}
-    </div>
+	<div>
+		<img src={avatar} alt={avatar === "." ? null : name} />
+		{name}
+	</div>
 </a>
 
 <style>
-    a {
-        display: inline-flex;
-        border-radius: 1em;
-        background: var(--hn-sys-color-outline);
-        padding: 1px;
-        color: inherit;
-        text-decoration: none;
-    }
+	a {
+		display: inline-flex;
+		border-radius: 1em;
+		background: var(--hn-sys-color-outline);
+		padding: 1px;
+		color: inherit;
+		text-decoration: none;
+	}
 
-    a > div {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        gap: 5px;
-        border-radius: inherit;
-        background-color: var(--hn-sys-color-surface);
-        padding: 5px;
-        padding-right: 8px;
-    }
+	a > div {
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		gap: 5px;
+		border-radius: inherit;
+		background-color: var(--hn-sys-color-surface);
+		padding: 5px;
+		padding-right: 8px;
+	}
 
-    a > div > img {
-        width: 1.2em;
-    }
+	a > div > img {
+		width: 1.2em;
+	}
 
-    a > div > img[alt] {
-        border-radius: 100%;
-    }
+	a > div > img[alt] {
+		border-radius: 100%;
+	}
 </style>

@@ -1,0 +1,124 @@
+{
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"linter": {
+		"rules": {
+			// nah
+			"a11y": "off",
+			"correctness": {
+				// import X from "y";
+				"noUnusedImports": "error"
+			},
+			"style": {
+				// x!
+				// x.y!
+				// x.y!.z
+				"noNonNullAssertion": "off"
+			},
+			"suspicious": {
+				// x: any
+				"noExplicitAny": "off"
+			}
+		}
+	},
+	"overrides": [
+		{
+			"includes": ["**/*.astro"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noUnusedImports": { "level": "off" },
+						"noUnusedVariables": { "level": "off" }
+					}
+				}
+			}
+		}
+	],
+	"assist": {
+		"actions": {
+			"source": {
+				// JS
+				"noDuplicateClasses": "on",
+				"useSortedAttributes": "on",
+
+				// <node imports>
+				//
+				// <external package imports>
+				//
+				// <aliased imports>
+				// <relative imports, exclusive of "*.css">
+				//
+				// <"*.css" imports>
+				"organizeImports": {
+					"level": "on",
+					"options": {
+						"identifierOrder": "natural",
+						"sortBareImports": false,
+						"groups": [
+							":NODE:",
+							":BLANK_LINE:",
+							[
+								":PACKAGE:",
+								"!classnames",
+								"!@components/**",
+								"!@layouts/**",
+								"!@lib/**",
+								"!@styles/**",
+								"!@members"
+							],
+							":BLANK_LINE:",
+							[
+								"@components/**",
+								"@layouts/**",
+								"@lib/**",
+								"@styles/**",
+								"@members",
+								":ALIAS:"
+							],
+							[":PATH:", "!:STYLE:"],
+							":BLANK_LINE:",
+							[":STYLE:"]
+						]
+					}
+				},
+
+				// CSS
+				"useSortedProperties": "on"
+			}
+		}
+	},
+	"formatter": {
+		"includes": ["**/*", "!**/*.astro"],
+
+		"indentStyle": "tab",
+
+		"lineEnding": "crlf",
+		"lineWidth": 80
+	},
+	"javascript": {
+		"formatter": {
+			// x => ...
+			// (x, y) => ...
+			"arrowParentheses": "asNeeded",
+
+			// if (
+			//   x
+			//   && y
+			//   && x
+			// ) { ... }
+			"operatorLinebreak": "before"
+		}
+	},
+	"css": {
+		"parser": {
+			"cssModules": true
+		},
+		"formatter": {
+			"enabled": true
+		}
+	}
+}

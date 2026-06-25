@@ -1,75 +1,74 @@
 ---
-import Base from "@layouts/Base.astro";
-
 import ProductLogo from "@components/ProductLogo.astro";
 import ChevronRight from "@components/svgs/ChevronRight.svg";
+import Base from "@layouts/Base.astro";
 
 interface Props {
-    title: string;
-    description: string;
+	title: string;
+	description: string;
 }
 
 const { title, description } = Astro.props;
 ---
 
 <Base title={title} description={description}>
-    <main>
-        <header>
-            <a href="/static/hn_88x31.gif" target="_blank">
-                <img title="hood network 88x31" src="/static/hn_88x31.gif" />
-            </a>
-            <a href="/blog" class="blog-link">
-                blog
-                <ChevronRight class="blog-chevron" />
-            </a>
-        </header>
+	<main>
+		<header>
+			<a href="/static/hn_88x31.gif" target="_blank">
+				<img title="hood network 88x31" src="/static/hn_88x31.gif" />
+			</a>
+			<a href="/blog" class="blog-link">
+				blog
+				<ChevronRight class="blog-chevron" />
+			</a>
+		</header>
 
-        <div class="content">
-            <slot />
-        </div>
-    </main>
+		<div class="content">
+			<slot />
+		</div>
+	</main>
 
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+	<style>
+		body {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
 
-        main {
-            max-width: 390px;
-            min-height: 180px;
-        }
+		main {
+			max-width: 390px;
+			min-height: 180px;
+		}
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+		header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
 
-        .blog-link {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-        }
+		.blog-link {
+			display: flex;
+			align-items: center;
+			text-decoration: none;
+		}
 
-        .blog-chevron {
-            height: 1em;
-            fill: currentColor;
-        }
+		.blog-chevron {
+			height: 1em;
+			fill: currentColor;
+		}
 
-        p {
-            margin: 0;
-        }
+		p {
+			margin: 0;
+		}
 
-        .content {
-            --hn-local-shape: var(--hn-sys-shape-large);
+		.content {
+			--hn-local-shape: var(--hn-sys-shape-large);
 
-            display: flex;
-            flex-direction: column;
-            gap: var(--hn-local-shape);
-            margin-top: var(--hn-local-shape);
-        }
-    </style>
+			display: flex;
+			flex-direction: column;
+			gap: var(--hn-local-shape);
+			margin-top: var(--hn-local-shape);
+		}
+	</style>
 </Base>

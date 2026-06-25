@@ -1,38 +1,37 @@
 ---
-import { getCollection } from "astro:content";
-
+import BlogCard from "@components/BlogCard.astro";
 import BlogBase from "@layouts/BlogBase.astro";
 
-import BlogCard from "@components/BlogCard.astro";
+import { getCollection } from "astro:content";
 
 const collection = await getCollection("blog");
 ---
 
 <BlogBase
-    title="blog"
-    description="👽👽👽"
-    fragments={[{ path: "/blog", content: "blog" }]}
+	title="blog"
+	description="👽👽👽"
+	fragments={[{ path: "/blog", content: "blog" }]}
 >
-    <main>
-        {
-            collection.map(entry => {
-                return <BlogCard {...entry} />;
-            })
-        }
-    </main>
+	<main>
+		{
+			collection.map(entry => {
+				return <BlogCard {...entry} />;
+			})
+		}
+	</main>
 </BlogBase>
 <style>
-    main {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: var(--hn-sys-shape-large);
-        min-width: min(900px, 100%);
-        max-width: 900px;
-    }
+	main {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--hn-sys-shape-large);
+		min-width: min(900px, 100%);
+		max-width: 900px;
+	}
 
-    @media (max-width: 900px) {
-        main {
-            grid-template-columns: 1fr;
-        }
-    }
+	@media (max-width: 900px) {
+		main {
+			grid-template-columns: 1fr;
+		}
+	}
 </style>

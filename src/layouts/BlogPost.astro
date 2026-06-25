@@ -1,257 +1,256 @@
 ---
-import { type CollectionEntry, getEntries } from "astro:content";
-
+import Author from "@components/Author.astro";
 import BlogBase from "@layouts/BlogBase.astro";
 
-import Author from "@components/Author.astro";
+import { type CollectionEntry, getEntries } from "astro:content";
 
 type Props = CollectionEntry<"blog">;
 
 const {
-    id,
-    data: { title, description, authors, banner, date },
+	id,
+	data: { title, description, authors, banner, date },
 } = Astro.props;
 
 const authorEntries = await getEntries(authors);
 const authorList = authorEntries.map(a => a.data);
 
 const formatter = new Intl.DateTimeFormat("en-US", {
-    month: "long",
-    day: "2-digit",
-    year: "numeric",
+	month: "long",
+	day: "2-digit",
+	year: "numeric",
 });
 
 const formattedDate = formatter.format(date);
 ---
 
 <BlogBase
-    title={title}
-    description={description}
-    banner={banner}
-    fragments={[
-        {
-            path: "/blog",
-            content: "blog",
-        },
-        {
-            path: `/blog/${id}`,
-            content: id,
-        },
-    ]}
+	title={title}
+	description={description}
+	banner={banner}
+	fragments={[
+		{
+			path: "/blog",
+			content: "blog",
+		},
+		{
+			path: `/blog/${id}`,
+			content: id,
+		},
+	]}
 >
-    <main>
-        <div class="pre-content">
-            <img src={banner} alt="post banner" class="post-banner" />
-            <div class="post-heading">
-                <span class="post-date">{formattedDate}</span>
-                <h1 class="post-title">{title}</h1>
-            </div>
-            <span class="post-authors">
-                {
-                    authorList.map(author => {
-                        return <Author {...author} />;
-                    })
-                }
-            </span>
-        </div>
+	<main>
+		<div class="pre-content">
+			<img src={banner} alt="post banner" class="post-banner" />
+			<div class="post-heading">
+				<span class="post-date">{formattedDate}</span>
+				<h1 class="post-title">{title}</h1>
+			</div>
+			<span class="post-authors">
+				{
+					authorList.map(author => {
+						return <Author {...author} />;
+					})
+				}
+			</span>
+		</div>
 
-        <article>
-            <slot />
-        </article>
-    </main>
+		<article>
+			<slot />
+		</article>
+	</main>
 </BlogBase>
 
 <style>
-    main {
-        width: 100%;
-        max-width: 900px;
-    }
+	main {
+		width: 100%;
+		max-width: 900px;
+	}
 
-    .pre-content {
-        --hn-local-shape: var(--hn-sys-shape-medium);
+	.pre-content {
+		--hn-local-shape: var(--hn-sys-shape-medium);
 
-        display: flex;
-        flex-direction: column;
-        gap: var(--hn-local-shape);
-        margin-bottom: var(--hn-sys-shape-large);
-    }
+		display: flex;
+		flex-direction: column;
+		gap: var(--hn-local-shape);
+		margin-bottom: var(--hn-sys-shape-large);
+	}
 
-    .post-banner {
-        margin-bottom: var(--hn-local-shape);
-        border-radius: var(--hn-sys-shape-medium);
-    }
+	.post-banner {
+		margin-bottom: var(--hn-local-shape);
+		border-radius: var(--hn-sys-shape-medium);
+	}
 
-    .post-heading {
-        display: flex;
-        flex-direction: column;
-        gap: var(--hn-sys-shape-small);
-    }
+	.post-heading {
+		display: flex;
+		flex-direction: column;
+		gap: var(--hn-sys-shape-small);
+	}
 
-    .post-title {
-        margin: 0;
-        font-size: 2.5em;
-    }
+	.post-title {
+		margin: 0;
+		font-size: 2.5em;
+	}
 
-    .post-authors {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: var(--hn-local-shape);
-    }
+	.post-authors {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--hn-local-shape);
+	}
 </style>
 <style is:global>
-    article h1 {
-        font-size: var(--hn-sys-typescale-heading-large-size);
-    }
+	article h1 {
+		font-size: var(--hn-sys-typescale-heading-large-size);
+	}
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        margin: var(--hn-sys-shape-extra-large) 0;
-        /* padding + header size */
-        scroll-margin-top: calc(4em + 44px);
-    }
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin: var(--hn-sys-shape-extra-large) 0;
+		/* padding + header size */
+		scroll-margin-top: calc(4em + 44px);
+	}
 
-    a[data-hn-wraps="heading"] {
-        color: inherit;
-        text-decoration: none;
-    }
+	a[data-hn-wraps="heading"] {
+		color: inherit;
+		text-decoration: none;
+	}
 
-    mark {
-        border-radius: var(--hn-sys-shape-small);
-        background-color: var(--hn-sys-color-tertiary);
-        padding: var(--hn-sys-shape-extra-small) var(--hn-sys-shape-small);
-        color: var(--hn-sys-color-on-tertiary);
-        line-height: 2.5;
-    }
+	mark {
+		border-radius: var(--hn-sys-shape-small);
+		background-color: var(--hn-sys-color-tertiary);
+		padding: var(--hn-sys-shape-extra-small) var(--hn-sys-shape-small);
+		color: var(--hn-sys-color-on-tertiary);
+		line-height: 2.5;
+	}
 
-    hr {
-        display: block;
-        margin: var(--hn-sys-shape-large) 0;
-        border: 0;
-        border-top: 1px solid var(--hn-sys-color-outline-variant);
-        padding: 0;
-        width: 100%;
-        height: 1px;
-    }
+	hr {
+		display: block;
+		margin: var(--hn-sys-shape-large) 0;
+		border: 0;
+		border-top: 1px solid var(--hn-sys-color-outline-variant);
+		padding: 0;
+		width: 100%;
+		height: 1px;
+	}
 
-    ol,
-    ul {
-        padding-left: var(--hn-sys-shape-large-increased);
-    }
+	ol,
+	ul {
+		padding-left: var(--hn-sys-shape-large-increased);
+	}
 
-    ul.contains-task-list {
-        padding-left: 0;
-        list-style-type: none;
-    }
+	ul.contains-task-list {
+		padding-left: 0;
+		list-style-type: none;
+	}
 
-    li.task-list-item > input[type="checkbox"] {
-        display: inline-block;
-        vertical-align: middle;
-        translate: 0 -2px;
-        margin-right: 0.5em;
-        border-radius: 2px;
-        width: 1em;
-        height: 1em;
-    }
+	li.task-list-item > input[type="checkbox"] {
+		display: inline-block;
+		vertical-align: middle;
+		translate: 0 -2px;
+		margin-right: 0.5em;
+		border-radius: 2px;
+		width: 1em;
+		height: 1em;
+	}
 
-    img {
-        max-width: 100%;
-    }
+	img {
+		max-width: 100%;
+	}
 
-    p {
-        margin: 1em 0;
-    }
+	p {
+		margin: 1em 0;
+	}
 
-    code {
-        font-size: 0.8em;
-        font-family: var(--hn-ref-typeface-monospace);
-    }
+	code {
+		font-size: 0.8em;
+		font-family: var(--hn-ref-typeface-monospace);
+	}
 
-    code[data-hn-code-type="inline"] {
-        border: 1px solid var(--hn-sys-color-outline-variant);
-        border-radius: var(--hn-sys-shape-small);
-        background-color: var(--hn-sys-color-surface);
-        padding: var(--hn-sys-shape-extra-small) var(--hn-sys-shape-small);
-        line-height: 2.5;
-    }
+	code[data-hn-code-type="inline"] {
+		border: 1px solid var(--hn-sys-color-outline-variant);
+		border-radius: var(--hn-sys-shape-small);
+		background-color: var(--hn-sys-color-surface);
+		padding: var(--hn-sys-shape-extra-small) var(--hn-sys-shape-small);
+		line-height: 2.5;
+	}
 
-    code[data-hn-code-type="block"] {
-        display: block;
-        position: relative;
-        width: 100%;
-        line-break: anywhere;
-        text-wrap: wrap;
-        word-break: break-all;
-        overflow-wrap: break-word;
-    }
+	code[data-hn-code-type="block"] {
+		display: block;
+		position: relative;
+		width: 100%;
+		line-break: anywhere;
+		text-wrap: wrap;
+		word-break: break-all;
+		overflow-wrap: break-word;
+	}
 
-    code[data-hn-code-type="block"]::before {
-        display: block;
-        position: absolute;
-        top: 0;
-        right: 0;
-        content: attr(data-hn-code-language);
-    }
+	code[data-hn-code-type="block"]::before {
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		content: attr(data-hn-code-language);
+	}
 
-    pre {
-        --hn-local-shape: var(--hn-sys-shape-medium);
+	pre {
+		--hn-local-shape: var(--hn-sys-shape-medium);
 
-        box-sizing: border-box;
-        margin: 1em 0;
-        border: 1px solid var(--hn-sys-color-outline-variant);
-        border-radius: var(--hn-local-shape);
-        background-color: var(--hn-sys-color-surface) !important;
-        padding: calc(2 * var(--hn-local-shape));
-        width: 100%;
-    }
+		box-sizing: border-box;
+		margin: 1em 0;
+		border: 1px solid var(--hn-sys-color-outline-variant);
+		border-radius: var(--hn-local-shape);
+		background-color: var(--hn-sys-color-surface) !important;
+		padding: calc(2 * var(--hn-local-shape));
+		width: 100%;
+	}
 
-    blockquote {
-        border-left: 2px solid var(--hn-sys-color-on-background);
-        padding-left: 1em;
-    }
+	blockquote {
+		border-left: 2px solid var(--hn-sys-color-on-background);
+		padding-left: 1em;
+	}
 
-    div[data-hn-wraps="table"] {
-        --hn-local-shape: var(--hn-sys-shape-medium);
+	div[data-hn-wraps="table"] {
+		--hn-local-shape: var(--hn-sys-shape-medium);
 
-        margin: 1em 0;
-        border: 1px solid var(--hn-sys-color-outline-variant);
-        border-radius: var(--hn-local-shape);
-        width: 100%;
-        min-width: 100%;
-        overflow: auto;
-        scrollbar-width: thin;
-    }
+		margin: 1em 0;
+		border: 1px solid var(--hn-sys-color-outline-variant);
+		border-radius: var(--hn-local-shape);
+		width: 100%;
+		min-width: 100%;
+		overflow: auto;
+		scrollbar-width: thin;
+	}
 
-    table {
-        border-collapse: collapse;
-        width: 100%;
-        min-width: fit-content;
-    }
+	table {
+		border-collapse: collapse;
+		width: 100%;
+		min-width: fit-content;
+	}
 
-    table thead {
-        background-color: var(--hn-sys-color-surface);
-    }
+	table thead {
+		background-color: var(--hn-sys-color-surface);
+	}
 
-    table thead > tr:first-child {
-        border: none;
-    }
+	table thead > tr:first-child {
+		border: none;
+	}
 
-    table tr {
-        border-top: 1px solid var(--hn-sys-color-outline-variant);
-    }
+	table tr {
+		border-top: 1px solid var(--hn-sys-color-outline-variant);
+	}
 
-    table th:first-child,
-    table td:first-child {
-        border: none;
-    }
+	table th:first-child,
+	table td:first-child {
+		border: none;
+	}
 
-    table th,
-    table td {
-        border-left: 1px solid var(--hn-sys-color-outline-variant);
-        padding: var(--hn-sys-shape-large-increased);
-    }
+	table th,
+	table td {
+		border-left: 1px solid var(--hn-sys-color-outline-variant);
+		padding: var(--hn-sys-shape-large-increased);
+	}
 </style>

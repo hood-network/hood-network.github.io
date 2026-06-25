@@ -1,15 +1,14 @@
 {
-    "plugins": ["prettier-plugin-astro", "prettier-plugin-css-order"],
-    "overrides": [
-        {
-            "files": "*.astro",
-            "options": {
-                "parser": "astro"
-            }
-        }
-    ],
-    "useTabs": false,
-    "tabWidth": 4,
-    "semi": true,
-    "arrowParens": "avoid"
+	"plugins": ["prettier-plugin-astro"],
+	"overrides": [
+		{
+			"files": "*.astro",
+			"options": {
+				"parser": "astro"
+			}
+		}
+	],
+	"useTabs": true,
+	"semi": true,
+	"arrowParens": "avoid"
 }

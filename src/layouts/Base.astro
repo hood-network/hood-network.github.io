@@ -2,10 +2,10 @@
 import "hn:design.css";
 
 interface Props {
-    title: string;
-    description: string;
-    banner?: string;
-    children: any;
+	title: string;
+	description: string;
+	banner?: string;
+	children: any;
 }
 
 const { title, description, banner = "/static/banner.webp" } = Astro.props;
@@ -13,99 +13,99 @@ const { title, description, banner = "/static/banner.webp" } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const fonts = {
-    "Dela Gothic One": null,
-    Roboto: null,
-    Figtree: "ital,wght@0,600..700;1,600..700",
-    "JetBrains Mono": "ital@0;1",
+	"Dela Gothic One": null,
+	Roboto: null,
+	Figtree: "ital,wght@0,600..700;1,600..700",
+	"JetBrains Mono": "ital@0;1",
 };
 
 const fontURL = new URL("https://fonts.googleapis.com/css2");
 
 for (const [font, data] of Object.entries(fonts)) {
-    fontURL.searchParams.append(
-        "family",
-        `${font}${data != null ? `:${data}` : ""}`,
-    );
+	fontURL.searchParams.append(
+		"family",
+		`${font}${data != null ? `:${data}` : ""}`,
+	);
 }
 ---
 
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta
-            content="width=device-width, initial-scale=1, viewport-fit=cover"
-            name="viewport"
-        />
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			content="width=device-width, initial-scale=1, viewport-fit=cover"
+			name="viewport"
+		/>
 
-        <title>{title}</title>
+		<title>{title}</title>
 
-        <link rel="canonical" href={canonicalURL} />
+		<link rel="canonical" href={canonicalURL} />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href={fontURL.href} rel="stylesheet" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href={fontURL.href} rel="stylesheet" />
 
-        <link rel="preconnect" href="https://github.com" crossorigin />
-        <link rel="preconnect" href="https://bignutty.gitlab.io" crossorigin />
+		<link rel="preconnect" href="https://github.com" crossorigin />
+		<link rel="preconnect" href="https://bignutty.gitlab.io" crossorigin />
 
-        <title>{title}</title>
+		<title>{title}</title>
 
-        <meta content="website" property="og:type" />
+		<meta content="website" property="og:type" />
 
-        <meta property="og:url" content={canonicalURL} />
-        <meta property="og:site_name" content="hood network" />
-        <meta content={title} property="og:title" />
-        <meta content={description} property="og:description" />
-        <meta content={banner} property="og:image" />
-        <meta content={description} name="description" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:site_name" content="hood network" />
+		<meta content={title} property="og:title" />
+		<meta content={description} property="og:description" />
+		<meta content={banner} property="og:image" />
+		<meta content={description} name="description" />
 
-        <meta content={title} property="twitter:title" />
-        <meta content={description} property="twitter:description" />
-        <meta content="summary_large_image" name="twitter:card" />
+		<meta content={title} property="twitter:title" />
+		<meta content={description} property="twitter:description" />
+		<meta content="summary_large_image" name="twitter:card" />
 
-        <meta content="#ff6868" name="theme-color" />
+		<meta content="#ff6868" name="theme-color" />
 
-        <link rel="shortcut icon" href="/favicon.png" type="image/png" />
-    </head>
-    <body>
-        <slot />
-    </body>
+		<link rel="shortcut icon" href="/favicon.png" type="image/png" />
+	</head>
+	<body>
+		<slot />
+	</body>
 </html>
 
 <style>
-    :global(*) {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+	:global(*) {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
 
-    html {
-        min-height: 100vh;
-        scrollbar-width: thin;
-    }
+	html {
+		min-height: 100vh;
+		scrollbar-width: thin;
+	}
 
-    body {
-        background: var(--hn-sys-color-background);
-        min-height: 100vh;
-        color: var(--hn-sys-color-on-background);
-        font-size: var(--hn-sys-typescale-body-medium-size);
-        line-height: var(--hn-sys-typescale-body-medium-line-height);
-        font-family: var(--hn-sys-typescale-body-medium-font);
-    }
+	body {
+		background: var(--hn-sys-color-background);
+		min-height: 100vh;
+		color: var(--hn-sys-color-on-background);
+		font-size: var(--hn-sys-typescale-body-medium-size);
+		line-height: var(--hn-sys-typescale-body-medium-line-height);
+		font-family: var(--hn-sys-typescale-body-medium-font);
+	}
 
-    @supports (min-height: 100cqh) {
-        body {
-            min-height: 100cqh;
-        }
-    }
+	@supports (min-height: 100cqh) {
+		body {
+			min-height: 100cqh;
+		}
+	}
 
-    @supports (min-height: 100svh) {
-        body {
-            min-height: 100svh;
-        }
-    }
+	@supports (min-height: 100svh) {
+		body {
+			min-height: 100svh;
+		}
+	}
 
-    :global(a) {
-        color: var(--hn-ref-palette-brand);
-    }
+	:global(a) {
+		color: var(--hn-ref-palette-brand);
+	}
 </style>

@@ -1,58 +1,58 @@
 ---
 interface Props {
-    title: string;
-    children: any;
+	title: string;
+	children: any;
 }
 
 const { title } = Astro.props;
 ---
 
 <div class="card-wrapper">
-    <div class="card">
-        <slot name="pre-section" />
+	<div class="card">
+		<slot name="pre-section" />
 
-        <div class="section">
-            <h1>{title}</h1>
+		<div class="section">
+			<h1>{title}</h1>
 
-            <slot />
-        </div>
-    </div>
+			<slot />
+		</div>
+	</div>
 </div>
 
 <style>
-    .card,
-    .card-wrapper {
-        width: 100%;
-        overflow: hidden;
-    }
+	.card,
+	.card-wrapper {
+		width: 100%;
+		overflow: hidden;
+	}
 
-    .card-wrapper {
-        --hn-local-shape: var(--hn-sys-shape-medium);
+	.card-wrapper {
+		--hn-local-shape: var(--hn-sys-shape-medium);
 
-        border-radius: var(--hn-local-shape);
-        background: var(--hn-sys-color-outline);
-        padding: 1px;
-    }
+		border-radius: var(--hn-local-shape);
+		background: var(--hn-sys-color-outline);
+		padding: 1px;
+	}
 
-    .card {
-        display: flex;
-        position: relative;
-        flex-direction: column;
-        gap: var(--hn-sys-shape-small);
-        border-radius: inherit;
-        background-color: var(--hn-sys-color-surface-container);
-        padding: calc(2 * var(--hn-local-shape));
-    }
+	.card {
+		display: flex;
+		position: relative;
+		flex-direction: column;
+		gap: var(--hn-sys-shape-small);
+		border-radius: inherit;
+		background-color: var(--hn-sys-color-surface-container);
+		padding: calc(2 * var(--hn-local-shape));
+	}
 
-    .section {
-        position: relative;
-    }
+	.section {
+		position: relative;
+	}
 
-    .section > h1 {
-        margin: 0;
-        margin-bottom: var(--hn-sys-shape-small);
-        font-size: var(--hn-sys-typescale-display-medium-size);
-        line-height: var(--hn-sys-typescale-display-medium-line-height);
-        font-family: var(--hn-sys-typescale-display-medium-font);
-    }
+	.section > h1 {
+		margin: 0;
+		margin-bottom: var(--hn-sys-shape-small);
+		font-size: var(--hn-sys-typescale-display-medium-size);
+		line-height: var(--hn-sys-typescale-display-medium-line-height);
+		font-family: var(--hn-sys-typescale-display-medium-font);
+	}
 </style>

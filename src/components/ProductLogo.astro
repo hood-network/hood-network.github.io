@@ -3,38 +3,38 @@ import Logo from "@components/svgs/Logo.svg";
 ---
 
 <div class="product-logo">
-    <Logo />
-    <span>hood network</span>
+	<Logo />
+	<span>hood network</span>
 </div>
 
 <style>
-    .product-logo {
-        display: flex;
-        align-items: center;
-        gap: var(--hn-sys-shape-small);
-        user-select: none;
-    }
+	.product-logo {
+		display: flex;
+		align-items: center;
+		gap: var(--hn-sys-shape-small);
+		user-select: none;
+	}
 
-    .product-logo > svg {
-        height: 1em;
-        fill: var(--hn-ref-palette-brand);
-    }
+	.product-logo > svg {
+		height: 1em;
+		fill: var(--hn-ref-palette-brand);
+	}
 
-    .product-logo > svg:hover {
-        animation: spin 2s infinite;
-    }
+	.product-logo > svg:hover {
+		animation: spin 2s infinite;
+	}
 
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(1turn);
-        }
-    }
+	@keyframes spin {
+		0% {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(1turn);
+		}
+	}
 
-    .product-logo > span {
-        line-height: var(--hn-sys-typescale-display-medium-line-height);
-        font-family: var(--hn-sys-typescale-display-medium-font);
-    }
+	.product-logo > span {
+		line-height: var(--hn-sys-typescale-display-medium-line-height);
+		font-family: var(--hn-sys-typescale-display-medium-font);
+	}
 </style>

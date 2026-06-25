@@ -2,74 +2,74 @@
 import ProductLogo from "./ProductLogo.astro";
 
 export interface PathFragment {
-    path: string;
-    content: string;
+	path: string;
+	content: string;
 }
 
 interface Props {
-    fragments: PathFragment[];
+	fragments: PathFragment[];
 }
 
 const { fragments } = Astro.props;
 ---
 
 <nav>
-    <div>
-        <a href="/">
-            <ProductLogo />
-        </a>
-        {
-            fragments.map(({ path, content }) => {
-                return (
-                    <>
-                        <span>&sol;</span>
-                        <a href={path}> {content} </a>
-                    </>
-                );
-            })
-        }
-    </div>
+	<div>
+		<a href="/">
+			<ProductLogo />
+		</a>
+		{
+			fragments.map(({ path, content }) => {
+				return (
+					<>
+						<span>&sol;</span>
+						<a href={path}> {content} </a>
+					</>
+				);
+			})
+		}
+	</div>
 </nav>
 
 <style>
-    nav {
-        position: sticky;
-        top: 2em;
-        z-index: 999;
-        border-radius: var(--hn-sys-shape-full);
-        background: var(--hn-sys-color-outline);
-        padding: 1px;
-        width: 100%;
-    }
+	nav {
+		position: sticky;
+		top: 2em;
+		z-index: 999;
+		border-radius: var(--hn-sys-shape-full);
+		background: var(--hn-sys-color-outline);
+		padding: 1px;
+		width: 100%;
+	}
 
-    nav > div {
-        display: flex;
-        align-items: center;
-        gap: var(--hn-sys-shape-medium);
-        box-sizing: border-box;
-        border-radius: inherit;
-        background-color: var(--hn-sys-color-surface);
-        padding: 10px 15px;
-    }
+	nav > div {
+		display: flex;
+		align-items: center;
+		gap: var(--hn-sys-shape-medium);
+		box-sizing: border-box;
+		border-radius: inherit;
+		background-color: var(--hn-sys-color-surface);
+		padding: 10px 15px;
+	}
 
-    nav a {
-        color: inherit;
-        text-decoration: none;
-    }
+	nav a {
+		color: inherit;
+		text-decoration: none;
+	}
 
-    nav a:nth-child(n + 2):hover {
-        text-decoration: underline;
-    }
+	nav a:nth-child(n + 2):hover {
+		text-decoration: underline;
+	}
 
-    @media (max-width: 450px) {
-        nav :global(.product-logo span) {
-            display: none;
-        }
+	@media (max-width: 450px) {
+		nav :global(.product-logo span) {
+			display: none;
+		}
 
-        nav :global(.product-logo::after) {
-            content: "hn";
-            line-height: var(--hn-sys-typescale-display-medium-line-height);
-            font-family: var(--hn-sys-typescale-display-medium-font);
-        }
-    }
+		nav :global(.product-logo::after) {
+			content: "hn";
+			line-height: var(--hn-sys-typescale-display-medium-line-height);
+			font-family: var(--hn-sys-typescale-display-medium-font);
+		}
+	}
 </style>
