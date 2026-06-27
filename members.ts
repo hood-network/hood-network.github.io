@@ -21,7 +21,7 @@ export const members: Member[] = [
 	member("DyDestroyer", "/static/av/dydestroyer.256.png", "https://github.com/DyDestroyer1027"),
 	member("Dziurwa", "/static/av/dziurwa.256.png", "https://github.com/Dziurwa14"),
 
-	member("eva", "https://github.com/xyzeva.png", "https://kibty.town"),
+	member("eva", "https://github.com/xyzeva.png", "https://eva.ac"),
 
 	member("Haruka", "/static/av/haruka.256.png", "https://shiroko.me"),
 
