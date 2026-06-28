@@ -1,12 +1,36 @@
 ---
 import BlogCard from "@components/BlogCard.astro";
+import QueryInput from "@components/QueryInput.astro";
 import BlogBase from "@layouts/BlogBase.astro";
 
 import { getCollection } from "astro:content";
 
-const collection = (await getCollection("blog")).sort(
-	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+const collection = await getCollection(
+	"blog",
+	data => data.id.charAt(0) !== "_",
+).then(collection =>
+	collection.sort((a, b) => b.data._date.valueOf() - a.data._date.valueOf()),
 );
+
+const tags = Object.fromEntries(
+	collection
+		.flatMap(c => c.data.tags)
+		.sort()
+		.map(k => [k, k]),
+);
+
+const authors = await getCollection("authors")
+	.then(authors => authors.map(a => [a.id, a.data.name] as const))
+	.then(mappings => Object.fromEntries(mappings));
+
+const id = crypto.randomUUID();
+const mainId = crypto.randomUUID();
+
+const postMetadata = collection.map(post => ({
+	id: post.id,
+	authors: post.data.authors.map(a => a.id),
+	tags: post.data.tags,
+}));
 ---
 
 <BlogBase
@@ -14,15 +38,147 @@ const collection = (await getCollection("blog")).sort(
 	description="👽👽👽"
 	fragments={[{ path: "/blog", content: "blog" }]}
 >
-	<main>
-		{
-			collection.map(entry => {
-				return <BlogCard {...entry} />;
-			})
-		}
+	<div class="filters">
+		<span class="filters-label">Filters:</span>
+		<div class="filter-inputs">
+			<QueryInput
+				placeholder="Enter tags"
+				options={tags}
+				query="tag"
+				listener={id}
+			/>
+			<QueryInput
+				placeholder="Enter authors"
+				options={authors}
+				query="author"
+				listener={id}
+			/>
+		</div>
+	</div>
+
+	<main id={mainId}>
+		{collection.map(post => <BlogCard {...post} />)}
+
+		<div class="not-found hidden" data-not-found="true">
+			Nothing matched your filter :(
+		</div>
 	</main>
 </BlogBase>
+
+<script is:inline define:vars={{ id, mainId, rawCollection: postMetadata }}>
+	const main = document.getElementById(mainId);
+
+	const collection = Object.fromEntries(
+		rawCollection.map(post => [
+			post.id,
+			{
+				authors: new Set(post.authors),
+				tags: new Set(post.tags),
+			},
+		]),
+	);
+
+	const params = new URLSearchParams(window.location.search);
+	const filters = {
+		tags: new Set(params.getAll("tag")),
+		authors: new Set(params.getAll("author")),
+	};
+
+	function setEq(a, b) {
+		if (a.size != b.size) return false;
+
+		for (const id of a) {
+			if (!b.has(id)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	function isSubset(a, b) {
+		if (a.size == 0) return true;
+
+		return a.isSubsetOf(b);
+	}
+
+	function applyFilters() {
+		let removed = 0;
+
+		const notFound = main.children.item(main.children.length - 1);
+
+		for (const child of main.children) {
+			if (child.dataset.notFound) continue;
+
+			const { authors, tags } = collection[child.dataset.postId];
+
+			if (isSubset(filters.authors, authors) && isSubset(filters.tags, tags)) {
+				child.classList.remove("hidden");
+			} else {
+				child.classList.add("hidden");
+				removed++;
+			}
+		}
+
+		if (removed === main.children.length - 1) {
+			notFound.classList.remove("hidden");
+		} else {
+			notFound.classList.add("hidden");
+		}
+	}
+
+	applyFilters();
+
+	window[id] = {
+		notify(query, value) {
+			let dirty = false;
+
+			switch (query) {
+				case "tag":
+					if (!setEq(filters.tags, value)) {
+						filters.tags = value;
+						dirty = true;
+					}
+					break;
+				case "author":
+					if (!setEq(filters.authors, value)) {
+						filters.authors = value;
+						dirty = true;
+					}
+					break;
+			}
+
+			if (dirty) {
+				const search = new URLSearchParams();
+
+				for (const id of filters.tags) search.append("tag", id);
+				for (const id of filters.authors) search.append("author", id);
+
+				window.history.pushState({}, "", `?${search.toString()}`);
+				applyFilters();
+			}
+		},
+	};
+</script>
+
 <style>
+	.filters {
+		display: flex;
+		align-items: center;
+		gap: var(--hn-sys-shape-medium);
+		min-width: min(900px, 100%);
+		max-width: 900px;
+	}
+
+	.filters-label {
+		font-variant: small-caps;
+	}
+
+	.filter-inputs {
+		display: flex;
+		gap: var(--hn-sys-shape-medium);
+	}
+
 	main {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -35,5 +191,9 @@ const collection = (await getCollection("blog")).sort(
 		main {
 			grid-template-columns: 1fr;
 		}
+	}
+
+	.not-found.hidden {
+		display: none;
 	}
 </style>

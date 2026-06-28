@@ -39,6 +39,7 @@
 		}
 	],
 	"assist": {
+		"includes": ["**/*", "!src/styles/design.scss"],
 		"actions": {
 			"source": {
 				// JS
@@ -75,7 +76,7 @@
 								"@components/**",
 								"@layouts/**",
 								"@lib/**",
-								"@styles/**",
+								"!@styles/**",
 								"@members",
 								":ALIAS:"
 							],

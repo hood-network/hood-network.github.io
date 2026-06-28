@@ -30,7 +30,7 @@ const { title, description, banner, fragments } = Astro.props;
 		flex-direction: column;
 		align-items: center;
 		gap: 4em;
-		transition: padding 100ms ease-in-out;
+		transition: padding var(--hn-sys-motion-duration-short2) ease-in-out;
 		padding: 2em 8em;
 		padding-bottom: 8em;
 	}
@@ -48,15 +48,15 @@ const { title, description, banner, fragments } = Astro.props;
 	}
 
 	:global(h1) {
-		font-weight: var(--hn-sys-typescale-heading-large-weight);
-		font-size: var(--hn-sys-typescale-heading-large-size);
-		line-height: var(--hn-sys-typescale-heading-large-line-height);
-		font-family: var(--hn-sys-typescale-heading-large-font);
+		font-weight: var(--hn-sys-typescale-heading-weight-emphasized);
+		font-size: var(--hn-sys-typescale-heading-large);
+		line-height: var(--hn-sys-typescale-heading-line-height);
+		font-family: var(--hn-sys-typescale-heading-font);
 	}
 
 	:global(h2, h3, h4, h5, h6) {
-		font-weight: var(--hn-sys-typescale-heading-medium-weight);
-		line-height: var(--hn-sys-typescale-heading-medium-line-height);
-		font-family: var(--hn-sys-typescale-heading-medium-font);
+		font-weight: var(--hn-sys-typescale-heading-weight);
+		line-height: var(--hn-sys-typescale-heading-line-height);
+		font-family: var(--hn-sys-typescale-heading-font);
 	}
 </style>

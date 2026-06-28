@@ -1,0 +1,275 @@
+---
+export interface Props {
+	placeholder: string;
+	options: Record<string, string>;
+	query: string;
+	listener: string;
+}
+
+const { placeholder, options, query, listener } = Astro.props;
+
+const id = crypto.randomUUID();
+---
+
+<div class="autocomplete-input">
+	<div class="input-wrapper">
+		<input id={id} class="input" placeholder={placeholder} />
+	</div>
+
+	<div class="completions hidden"></div>
+</div>
+
+<script is:inline define:vars={{ id, options, query, listener }}>
+	/** @type {HTMLInputElement} */
+	const input = document.getElementById(id);
+
+	/** @type {HTMLDivElement} */
+	const completions = input.parentElement.nextElementSibling;
+
+	const cssAttr = Array.from(input.attributes).find(k =>
+		k.nodeName.startsWith("data-astro"),
+	).nodeName;
+
+	const all = Object.keys(options);
+	const friendlyNames = Object.fromEntries(
+		Object.entries(options).map(kv => [kv[1], kv[0]]),
+	);
+	const current = new Set(
+		new URLSearchParams(window.location.search).getAll(query),
+	);
+
+	const mutation = {
+		add(id) {
+			current.add(id);
+			window[listener].notify(query, new Set(current));
+		},
+		delete(id) {
+			current.delete(id);
+			window[listener].notify(query, new Set(current));
+		},
+	};
+
+	// scoring:
+	// x != y           ret -1
+	// x == y           +1
+	// consecutive      +3
+	// start of word    +2
+	function fuzzyScore(a, b) {
+		a = a.toLowerCase();
+		b = b.toLowerCase();
+
+		if (a === b) return Infinity;
+
+		let score = 0;
+		let lastMatch = -1;
+
+		for (const c of a) {
+			const i = b.indexOf(c, lastMatch + 1);
+
+			if (i === -1) return -1;
+
+			score += 1;
+
+			if (i === lastMatch + 1) score += 3;
+
+			if (i === 0 || b[i - 1] === " " || b[i - 1] === "_" || b[i - 1] === "-") {
+				score += 2;
+			}
+
+			lastMatch = i;
+		}
+
+		score -= b.length - a.length;
+
+		return score;
+	}
+
+	function createChip(id) {
+		const span = document.createElement("span");
+		span.setAttribute(cssAttr, "");
+		span.innerText = id;
+
+		const button = document.createElement("button");
+		button.setAttribute(cssAttr, "");
+		button.innerText = "×";
+
+		const div = document.createElement("div");
+		div.className = "chip";
+		div.setAttribute(cssAttr, "");
+		div.append(span, button);
+
+		button.addEventListener("click", () => {
+			mutation.delete(id);
+			div.remove();
+		});
+
+		return div;
+	}
+
+	function addChip(id) {
+		if (current.has(id)) return;
+
+		if (!(id in options)) return;
+
+		input.value = "";
+
+		mutation.add(id);
+		const chip = createChip(id);
+
+		input.before(chip);
+	}
+
+	function createCompletion(id) {
+		const button = document.createElement("button");
+		button.classList = "completion";
+		button.setAttribute(cssAttr, "");
+		button.innerText = options[id];
+		button.tabIndex = -1;
+
+		button.addEventListener("click", () => {
+			input.value = "";
+
+			addChip(id);
+		});
+
+		return button;
+	}
+
+	function getCompletions() {
+		const inp = input.value.trim();
+
+		if (!inp) return all.filter(id => !current.has(id)).map(createCompletion);
+
+		const comp = [];
+
+		for (const id of all) {
+			if (current.has(id)) continue;
+
+			const score = fuzzyScore(inp, id);
+
+			if (score < 0) continue;
+
+			comp.push([createCompletion(id), score]);
+		}
+
+		return comp.sort((a, b) => b[1] - a[1]).map(c => c[0]);
+	}
+
+	function updateCompletions() {
+		const comp = getCompletions();
+		completions.replaceChildren(...comp);
+
+		if (comp.length === 0) completions.classList.add("hidden");
+		else completions.classList.remove("hidden");
+	}
+
+	input.before(...Array.from(current).map(createChip));
+
+	input.addEventListener("keydown", e => {
+		if (e.key === "Backspace") {
+			if (input.value.length === 0) {
+				const chip = input.previousElementSibling;
+
+				if (chip == null) return;
+
+				e.preventDefault();
+				chip.children[1].click();
+			}
+		} else if (e.key === "Enter") {
+			e.preventDefault();
+
+			let id = input.value.trim();
+
+			if (options[id] == null && friendlyNames[id] != null) {
+				id = friendlyNames[id];
+			}
+
+			addChip(id);
+		}
+	});
+
+	input.addEventListener("keyup", () => updateCompletions());
+	input.addEventListener("focus", () => updateCompletions());
+
+	input.addEventListener("blur", () => {
+		setTimeout(() => completions.classList.add("hidden"), 100);
+	});
+</script>
+
+<style>
+	.autocomplete-input {
+		padding: var(--hn-sys-shape-small) var(--hn-sys-shape-medium);
+		background: var(--hn-sys-color-surface);
+		border: 1px solid var(--hn-sys-color-surface-outline);
+		border-radius: var(--hn-sys-shape-small);
+		position: relative;
+		width: 300px;
+	}
+
+	.input-wrapper {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--hn-sys-shape-small);
+	}
+
+	.chip {
+		display: flex;
+		align-items: center;
+		gap: var(--hn-sys-shape-extra-small);
+		padding: var(--hn-sys-shape-extra-small) var(--hn-sys-shape-small);
+		border-radius: var(--hn-sys-shape-full);
+		background-color: var(--hn-sys-color-surface-darker);
+		color: var(--hn-sys-color-on-surface-darker);
+		font-size: var(--hn-sys-typescale-body-small);
+	}
+
+	.chip > button {
+		background: transparent;
+		border: none;
+		cursor: pointer;
+	}
+
+	.input {
+		background: transparent;
+		border: none;
+		outline: none;
+		flex: 1;
+		padding: var(--hn-sys-shape-extra-small) var(--hn-sys-shape-small);
+		min-width: 100px;
+	}
+
+	.completions.hidden {
+		display: none;
+	}
+
+	.completions {
+		top: 100%;
+		left: 0;
+		width: 100%;
+		z-index: 999;
+		margin-top: var(--hn-sys-shape-medium);
+		position: absolute;
+		padding: var(--hn-sys-shape-medium);
+		background: var(--hn-sys-color-surface);
+		border: 1px solid var(--hn-sys-color-surface-outline);
+		border-radius: var(--hn-sys-shape-small);
+		display: flex;
+		flex-direction: column;
+		max-height: 300px;
+		overflow-y: auto;
+		scrollbar-width: thin;
+	}
+
+	.completion {
+		padding: var(--hn-sys-shape-small) var(--hn-sys-shape-medium);
+		border: none;
+		border-radius: var(--hn-sys-shape-extra-small);
+		text-align: left;
+		background: transparent;
+		cursor: pointer;
+	}
+
+	.completion:hover {
+		background: var(--hn-sys-color-surface-darker);
+	}
+</style>

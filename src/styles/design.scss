@@ -1,0 +1,313 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+@use "sass:string";
+
+@function hn($name) {
+	@return var(--hn-#{$name});
+}
+
+@mixin define($section, $name, $value) {
+	--hn-#{$section}-#{$name}: #{$value};
+}
+
+// biome-ignore format: it splits the defines onto newlines, ugly
+@mixin design($map) {
+	@each $name, $typeface in map.get($map, "typeface") {
+		@include define(ref-typeface, $name, $typeface);
+	}
+
+	@each $name, $palette in map.get($map, "palette") {
+		@include define(ref-palette, $name, $palette);
+	}
+
+	@each $name, $typescale in map.get($map, "typescale") {
+		@include define(sys-typescale, #{$name}-font, map.get($typescale, "font"));
+
+		@include define(sys-typescale, #{$name}-line-height, map.get($typescale, "line-height"));
+		@include define(sys-typescale, #{$name}-letter-spacing, map.get($typescale, "letter-spacing"));
+
+		@include define(sys-typescale, #{$name}-weight, map.get($typescale, "weight"));
+		@include define(sys-typescale, #{$name}-weight-emphasized, map.get($typescale, "weight-emphasized"));
+
+		@include define(sys-typescale, #{$name}-large, map.get($typescale, "large"));
+		@include define(sys-typescale, #{$name}-medium, map.get($typescale, "medium"));
+		@include define(sys-typescale, #{$name}-small, map.get($typescale, "small"));
+	}
+
+	@each $name, $color in map.get($map, "color") {
+		@include define(sys-color, $name, $color);
+	}
+
+	@each $name, $shape in map.get($map, "shape") {
+		@include define(sys-shape, $name, $shape);
+	}
+
+	@each $name, $motion in map.get($map, "motion") {
+		@if meta.type-of($motion) == "map" {
+			@include define(sys-motion, #{$name}-duration, map.get($motion, "duration"));
+			@include define(sys-motion, #{$name}-easing, map.get($motion, "easing"));
+		} @else {
+			@include define(sys-motion-duration, $name, $motion);
+		}
+	}
+
+	@each $name, $token-def in map.get($map, "syntect") {
+		@include define(sys-color-ext-syntect, $name, map.get($token-def, "color"));
+
+		$selectors: ();
+
+		@each $scope in map.get($token-def, "scopes") {
+			$parts: string.split($scope, ".");
+			$selector: "";
+
+			@each $part in $parts {
+				@if $selector == "" {
+					$selector: ".hn-syntect-#{$part}";
+				} @else {
+					$selector: "#{$selector}.hn-syntect-#{$part}";
+				}
+
+				$selectors: list.append($selectors, $selector, comma);
+			}
+		}
+
+		#{$selectors} {
+			font-style: map.get($token-def, "font-style");
+			// biome-ignore lint/correctness/noUnknownFunction: it's not
+			color: hn(sys-color-ext-syntect-#{$name});
+		}
+	}
+}
+
+:root {
+	// biome-ignore-start lint/correctness/noUnknownFunction: it's not unknown (hn func)
+	@include design(
+		(
+			"typeface": (
+				"brand": '"Dela Gothic One", sans-serif',
+				"heading": '"Figtree", sans-serif',
+				"plain": '"Roboto", sans-serif',
+				"monospace": '"Jetbrains Mono", monospace',
+			),
+			"palette": (
+				"brand": #ff6868,
+			),
+			"typescale": (
+				"display": (
+					"font": hn(ref-typeface-brand),
+					"line-height": "normal",
+					"letter-spacing": "normal",
+					"weight": 400,
+					"weight-emphasized": 400,
+					"large": 3em,
+					"medium": 2em,
+					"small": 1em,
+				),
+				"heading": (
+					"font": hn(ref-typeface-heading),
+					"line-height": "normal",
+					"letter-spacing": "normal",
+					"weight": 600,
+					"weight-emphasized": 700,
+					"large": 2em,
+					"medium": 1.5em,
+					"small": 1em,
+				),
+				"body": (
+					"font": hn(ref-typeface-plain),
+					"line-height": "normal",
+					"letter-spacing": "normal",
+					"weight": 400,
+					"weight-emphasized": 400,
+					"large": 1em,
+					"medium": 1em,
+					"small": 0.9em,
+				),
+			),
+			"color": (
+				"background":
+					linear-gradient(
+						0deg,
+						light-dark(#ffffff, #181b1e),
+						light-dark(#f9fafb, #23272b)
+					),
+				"on-background": light-dark(#404040, #ffffff),
+
+				"tertiary": light-dark(#ff686855, #ff6868aa),
+				"on-tertiary": light-dark(#404040, #ffffff),
+
+				"surface": light-dark(#f1f2f3, #303236),
+				"surface-outline": light-dark(#d6d8db, #5a5c60),
+				"on-surface": light-dark(#404040, #ffffff),
+
+				"surface-darker": light-dark(#dfdfdf, #3c3f44),
+				"on-surface-darker": light-dark(#404040, #ffffff),
+
+				"outline":
+					linear-gradient(
+						135deg,
+						light-dark(#d6d8db, #5a5c60),
+						light-dark(#e4e5e7, #3c4044)
+					),
+				"outline-variant": light-dark(#c9cbcf, #545659),
+			),
+			"shape": (
+				"none": 0,
+				"extra-small": 4px,
+				"small": 8px,
+				"medium": 12px,
+				"large": 16px,
+				"large-increased": 20px,
+				"extra-large": 28px,
+				"extra-large-increased": 32px,
+				"extra-extra-large": 48px,
+				"full": 9999px,
+			),
+			"motion": (
+				"expressive-fast-spatial": (
+					"duration": 350ms,
+					"easing": cubic-bezier(0.42, 1.67, 0.21, 0.9),
+				),
+				"expressive-default-spatial": (
+					"duration": 500ms,
+					"easing": cubic-bezier(0.38, 1.21, 0.22, 1),
+				),
+				"expressive-slow-spatial": (
+					"duration": 650ms,
+					"easing": cubic-bezier(0.39, 1.29, 0.35, 0.98),
+				),
+				"expressive-fast-effects": (
+					"duration": 150ms,
+					"easing": cubic-bezier(0.31, 0.94, 0.34, 1),
+				),
+				"expressive-default-effects": (
+					"duration": 200ms,
+					"easing": cubic-bezier(0.34, 0.8, 0.34, 1),
+				),
+				"expressive-slow-effects": (
+					"duration": 300ms,
+					"easing": cubic-bezier(0.34, 0.88, 0.34, 1),
+				),
+				"standard-fast-spatial": (
+					"duration": 350ms,
+					"easing": cubic-bezier(0.27, 1.06, 0.18, 1),
+				),
+				"standard-default-spatial": (
+					"duration": 500ms,
+					"easing": cubic-bezier(0.27, 1.06, 0.18, 1),
+				),
+				"standard-slow-spatial": (
+					"duration": 750ms,
+					"easing": cubic-bezier(0.27, 1.06, 0.18, 1),
+				),
+				"standard-fast-effects": (
+					"duration": 150ms,
+					"easing": cubic-bezier(0.31, 0.94, 0.34, 1),
+				),
+				"standard-default-effects": (
+					"duration": 200ms,
+					"easing": cubic-bezier(0.34, 0.8, 0.34, 1),
+				),
+				"standard-slow-effects": (
+					"duration": 300ms,
+					"easing": cubic-bezier(0.34, 0.88, 0.34, 1),
+				),
+				"emphasized-decelerate": (
+					"duration": 500ms,
+					"easing": cubic-bezier(0.05, 0.7, 0.1, 1),
+				),
+				"emphasized-accelerate": (
+					"duration": 200ms,
+					"easing": cubic-bezier(0.3, 0, 0.8, 0.15),
+				),
+				"standard": (
+					"duration": 300ms,
+					"easing": cubic-bezier(0.2, 0, 0, 1),
+				),
+				"standard-decelerate": (
+					"duration": 300ms,
+					"easing": cubic-bezier(0, 0, 0, 1),
+				),
+				"standard-accelerate": (
+					"duration": 200ms,
+					"easing": cubic-bezier(0.3, 0, 1, 1),
+				),
+				"short1": 50ms,
+				"short2": 100ms,
+				"short3": 150ms,
+				"short4": 200ms,
+				"medium1": 250ms,
+				"medium2": 300ms,
+				"medium3": 350ms,
+				"medium4": 400ms,
+				"long1": 450ms,
+				"long2": 500ms,
+				"long3": 550ms,
+				"long4": 600ms,
+				"extra-long1": 700ms,
+				"extra-long2": 800ms,
+				"extra-long3": 900ms,
+				"extra-long4": 1000ms,
+			),
+			// this is adopted from the rose-pine theme for typst
+			//
+			// credits to original authors:
+			// https://github.com/rose-pine/typst/tree/main
+			//
+			// commit hash: 1ea2d2eb1c3ae0c136e23888cc4c224a6de8224f
+			"syntect": (
+					comment: (
+						"scopes": ("comment"),
+						"color": light-dark(#797593, #908caa),
+						"font-style": italic,
+					),
+					string: (
+						"scopes": (
+							"string", "variable.parameter"
+						),
+						"color": light-dark(#ea9d34, #f6c177),
+					),
+					numeric: (
+						"scopes": (
+							"constant.numeric",
+							"constant.language",
+							"constant.character",
+							"constant.other",
+						),
+						"color": light-dark(#907aa9, #c4a7e7),
+					),
+					variable: (
+						"scopes": ("variable"),
+						"color": light-dark(#d7827e, #ea9a97),
+					),
+					keyword: (
+						"scopes": (
+							"keyword", "storage", "entity.name.tag"
+						),
+						"color": light-dark(#b4637a, #eb6f92),
+					),
+					type: (
+						"scopes": (
+							"storage.type",
+							"support.function",
+							"support.constant",
+							"support.type",
+							"support.class",
+						),
+						"color": light-dark(#56949f, #9ccfd8),
+					),
+					class: (
+						"scopes": (
+							"entity.name.class",
+							"entity.other.inherited-class",
+							"entity.name.function",
+							"entity.other.attribute-name",
+						),
+						"color": light-dark(#286983, #3e8fb0),
+					),
+				),
+		)
+	);
+	// biome-ignore-end lint/correctness/noUnknownFunction: ...
+}

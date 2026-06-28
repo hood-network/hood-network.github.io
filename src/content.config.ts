@@ -16,20 +16,31 @@ const PLACEHOLDER_BANNERS = [
 	"/static/blog_banner_3.webp",
 ];
 
+const formatter = new Intl.DateTimeFormat("en-US", {
+	month: "long",
+	day: "2-digit",
+	year: "numeric",
+	timeZone: "UTC",
+});
+
 const blog = defineCollection({
 	loader: glob({ pattern: "**/*.md", base: "blog" }),
 	schema: z
 		.object({
+			banner: z.string().optional(),
 			title: z.string(),
 			description: z.string(),
 			date: z.coerce.date(),
+			revised: z.coerce.date().optional(),
 			authors: z.array(reference("authors")).nonempty(),
-			updatedDate: z.coerce.date().optional(),
-			banner: z.string().optional(),
+			tags: z.array(z.string()),
 		})
 		.transform(post => ({
 			...post,
 			banner: post.banner ?? PLACEHOLDER_BANNERS[mmh.v3(post.title) & 7],
+			_date: post.date,
+			date: formatter.format(post.date),
+			revised: formatter.format(post.revised),
 		})),
 });
 

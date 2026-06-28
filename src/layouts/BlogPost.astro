@@ -8,19 +8,11 @@ type Props = CollectionEntry<"blog">;
 
 const {
 	id,
-	data: { title, description, authors, banner, date },
+	data: { banner, title, description, date, revised, authors, tags },
 } = Astro.props;
 
 const authorEntries = await getEntries(authors);
 const authorList = authorEntries.map(a => a.data);
-
-const formatter = new Intl.DateTimeFormat("en-US", {
-	month: "long",
-	day: "2-digit",
-	year: "numeric",
-});
-
-const formattedDate = formatter.format(date);
 ---
 
 <BlogBase
@@ -42,17 +34,48 @@ const formattedDate = formatter.format(date);
 		<div class="pre-content">
 			<img src={banner} alt="post banner" class="post-banner" />
 			<div class="post-heading">
-				<span class="post-date">{formattedDate}</span>
+				<span class="post-date">
+					<span>{date}</span>
+					{
+						revised != null && (
+							<>
+								<>
+									<span>•</span>
+									<span>Revised {revised}</span>
+								</>
+							</>
+						)
+					}
+				</span>
 				<h1 class="post-title">{title}</h1>
 			</div>
-			<span class="post-authors">
-				{
-					authorList.map(author => {
-						return <Author {...author} />;
-					})
-				}
-			</span>
+			<div class="post-metadata">
+				<span class="post-metadata-title">Tags:</span>
+				<div class="post-metadata-content">
+					{
+						tags.map(tag => (
+							<a href={`/blog?tag=${encodeURIComponent(tag)}`} class="post-tag">
+								{tag}
+							</a>
+						))
+					}
+				</div>
+
+				<span class="post-metadata-title">Authors:</span>
+				<div class="post-metadata-content">
+					{
+						authorList.map((author, idx) => (
+							<Author
+								{...author}
+								url={`/blog?author=${encodeURIComponent(authorEntries[idx].id)}`}
+							/>
+						))
+					}
+				</div>
+			</div>
 		</div>
+
+		<hr class="pre-content-hr" />
 
 		<article>
 			<slot />
@@ -67,12 +90,17 @@ const formattedDate = formatter.format(date);
 	}
 
 	.pre-content {
-		--hn-local-shape: var(--hn-sys-shape-medium);
+		--hn-local-shape: var(--hn-sys-shape-large-increased);
 
 		display: flex;
 		flex-direction: column;
 		gap: var(--hn-local-shape);
 		margin-bottom: var(--hn-sys-shape-large);
+	}
+
+	.pre-content-hr {
+		margin: var(--hn-sys-shape-extra-extra-large) 0;
+		opacity: 0.5;
 	}
 
 	.post-banner {
@@ -86,21 +114,45 @@ const formattedDate = formatter.format(date);
 		gap: var(--hn-sys-shape-small);
 	}
 
+	.post-date {
+		display: flex;
+		gap: var(--hn-sys-shape-large);
+	}
+
 	.post-title {
 		margin: 0;
 		font-size: 2.5em;
 	}
 
-	.post-authors {
+	.post-metadata {
+		display: grid;
+		grid-template-columns: 70px 1fr;
+		gap: var(--hn-sys-shape-medium);
+	}
+
+	.post-metadata-title {
+		font-variant: small-caps;
+	}
+
+	.post-metadata-content {
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: var(--hn-local-shape);
+		gap: var(--hn-sys-shape-medium);
+	}
+
+	.post-tag {
+		text-decoration: none;
+	}
+
+	.post-tag:hover {
+		text-decoration: dotted underline;
+		text-underline-offset: var(--hn-sys-shape-extra-small);
 	}
 </style>
 <style is:global>
 	article h1 {
-		font-size: var(--hn-sys-typescale-heading-large-size);
+		font-size: var(--hn-sys-typescale-heading-large);
 	}
 
 	h1,
@@ -180,20 +232,7 @@ const formattedDate = formatter.format(date);
 
 	code[data-hn-code-type="block"] {
 		display: block;
-		position: relative;
-		width: 100%;
-		line-break: anywhere;
-		text-wrap: wrap;
-		word-break: break-all;
-		overflow-wrap: break-word;
-	}
-
-	code[data-hn-code-type="block"]::before {
-		display: block;
-		position: absolute;
-		top: 0;
-		right: 0;
-		content: attr(data-hn-code-language);
+		width: fit-content;
 	}
 
 	pre {
@@ -206,6 +245,8 @@ const formattedDate = formatter.format(date);
 		background-color: var(--hn-sys-color-surface) !important;
 		padding: calc(2 * var(--hn-local-shape));
 		width: 100%;
+		scrollbar-width: thin;
+		overflow-x: auto;
 	}
 
 	blockquote {

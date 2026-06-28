@@ -7,64 +7,53 @@ const {
 	id,
 	data: { title, description, date, banner },
 } = Astro.props;
-
-const formatter = new Intl.DateTimeFormat("en-US", {
-	month: "long",
-	day: "2-digit",
-	year: "numeric",
-});
-
-const formattedDate = formatter.format(date);
 ---
 
-<a href={`/blog/${id}`}>
+<a href={`/blog/${id}`} class="post-link" data-post-id={id}>
 	<div class="card">
-		<img
-			src={banner}
-			slot="pre-section"
-			alt="post banner"
-			class="post-banner"
-		/>
+		<img src={banner} alt={title} class="post-banner" />
 
 		<div class="section">
 			<div class="post-heading">
-				<span class="post-date">{formattedDate}</span>
-				<h1 class="post-title line-clamp">{title}</h1>
+				<span>{date}</span>
+				<h1 class="line-clamp">{title}</h1>
 			</div>
 
-			<p class="post-description line-clamp">
-				{description}
-			</p>
+			<p class="line-clamp">{description}</p>
 		</div>
 	</div>
 </a>
 
 <style>
-	a {
+	.post-link {
 		color: inherit;
 		text-decoration: none;
+	}
+
+	.post-link.hidden {
+		display: none;
 	}
 
 	.card {
 		--hn-local-shape: var(--hn-sys-shape-medium);
 		--hn-local-padding: calc(2 * var(--hn-local-shape));
+		position: relative;
+		box-sizing: border-box;
 
 		display: flex;
-		position: relative;
 		flex-direction: column;
 		gap: var(--hn-local-padding);
-		box-sizing: border-box;
+		width: 100%;
+		padding: var(--hn-local-padding);
+		overflow: hidden;
+		background-color: var(--hn-sys-color-surface);
 		border: 1px solid var(--hn-sys-color-outline-variant);
 		border-radius: var(--hn-local-shape);
-		background-color: var(--hn-sys-color-surface);
-		padding: var(--hn-local-padding);
-		width: 100%;
-		overflow: hidden;
 	}
 
 	.section {
-		display: flex;
 		position: relative;
+		display: flex;
 		flex-direction: column;
 		gap: var(--hn-local-padding);
 	}
@@ -73,11 +62,11 @@ const formattedDate = formatter.format(date);
 		--hn-local-line-clamp: 1;
 
 		display: -webkit-box;
-		-webkit-line-clamp: var(--hn-local-line-clamp);
 		-webkit-box-orient: vertical;
-		line-clamp: var(--hn-local-line-clamp);
 		overflow: hidden;
 		text-overflow: ellipsis;
+		-webkit-line-clamp: var(--hn-local-line-clamp);
+		line-clamp: var(--hn-local-line-clamp);
 	}
 
 	.post-heading {
@@ -87,16 +76,16 @@ const formattedDate = formatter.format(date);
 	}
 
 	@media (max-width: 600px) {
-		.section > h1 {
+		.post-title > h1 {
 			font-size: 1.5em;
 		}
 	}
 
 	.post-banner {
+		width: calc(100% + (2 * var(--hn-local-padding)));
+		aspect-ratio: 2 / 1;
 		margin: 0 calc(-1 * var(--hn-local-padding));
 		margin-top: calc(-1 * var(--hn-local-padding));
-		aspect-ratio: 2/1;
-		width: calc(100% + (2 * var(--hn-local-padding)));
 		object-fit: cover;
 	}
 </style>

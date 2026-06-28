@@ -4,6 +4,8 @@ description: (and why Cider is superior on desktops)
 date: 23 July 2025 18:51 GMT+0300
 authors:
   - puhbu
+tags:
+  - music
 ---
 
 ## Apple Music, you aren't bad...

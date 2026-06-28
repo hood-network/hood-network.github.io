@@ -7,15 +7,12 @@ import { members } from "@members";
 <Card title="who?">
 	<Alien class="card-deco" slot={"pre-section"} />
 
-	<div class="avatar-row">
+	<div class="avatar-grid">
 		{
 			members.map(member => {
 				return (
 					<a title={member.name} href={member.url}>
-						<img
-							src={member.avatar}
-							alt={member.avatar === "." ? null : member.name}
-						/>
+						<img src={member.avatar} alt={member.avatar} />
 					</a>
 				);
 			})
@@ -34,7 +31,7 @@ import { members } from "@members";
 		user-select: none;
 	}
 
-	.avatar-row {
+	.avatar-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
 		gap: 1em;
