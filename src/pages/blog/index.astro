@@ -14,12 +14,16 @@ const collection = await getCollection(
 
 const tags = Object.fromEntries(
 	collection
-		.flatMap(c => c.data.tags)
+		.flatMap(post => post.data.tags)
 		.sort()
-		.map(k => [k, k]),
+		.map(tag => [tag, tag]),
 );
 
-const authors = await getCollection("authors")
+const postAuthors = new Set(
+	collection.flatMap(post => post.data.authors.map(a => a.id)),
+);
+
+const authors = await getCollection("authors", data => postAuthors.has(data.id))
 	.then(authors => authors.map(a => [a.id, a.data.name] as const))
 	.then(mappings => Object.fromEntries(mappings));
 
@@ -168,7 +172,7 @@ const postMetadata = collection.map(post => ({
 	window.addEventListener("popstate", () => {
 		filters = getFilters();
 		applyFilters();
-	})
+	});
 </script>
 
 <style>
