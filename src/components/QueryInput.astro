@@ -87,7 +87,7 @@ const id = crypto.randomUUID();
 	function createChip(id) {
 		const span = document.createElement("span");
 		span.setAttribute(cssAttr, "");
-		span.innerText = id;
+		span.innerText = options[id];
 
 		const button = document.createElement("button");
 		button.setAttribute(cssAttr, "");
