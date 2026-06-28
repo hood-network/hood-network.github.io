@@ -78,11 +78,16 @@ const postMetadata = collection.map(post => ({
 		]),
 	);
 
-	const params = new URLSearchParams(window.location.search);
-	const filters = {
-		tags: new Set(params.getAll("tag")),
-		authors: new Set(params.getAll("author")),
-	};
+	function getFilters() {
+		const params = new URLSearchParams(window.location.search);
+
+		return {
+			tags: new Set(params.getAll("tag")),
+			authors: new Set(params.getAll("author")),
+		};
+	}
+
+	let filters = getFilters();
 
 	function setEq(a, b) {
 		if (a.size != b.size) return false;
@@ -159,23 +164,31 @@ const postMetadata = collection.map(post => ({
 			}
 		},
 	};
+
+	window.addEventListener("popstate", () => {
+		filters = getFilters();
+		applyFilters();
+	})
 </script>
 
 <style>
 	.filters {
 		display: flex;
-		align-items: center;
 		gap: var(--hn-sys-shape-medium);
 		min-width: min(900px, 100%);
 		max-width: 900px;
 	}
 
 	.filters-label {
+		height: 45px;
+		display: flex;
+		align-items: center;
 		font-variant: small-caps;
 	}
 
 	.filter-inputs {
 		display: flex;
+		align-items: flex-start;
 		gap: var(--hn-sys-shape-medium);
 	}
 
