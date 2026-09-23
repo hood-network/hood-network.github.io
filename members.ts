@@ -12,7 +12,6 @@ export const members: Member[] = [
 
 	member("bignutty", "https://bignutty.gitlab.io/webstorage/bnav/latest-256.png", "https://bignut.zip"),
 
-	member("Chaussette", "/static/av/chaussette.256.png", "https://dfr.gg"),
 	member("Chloe", "https://github.com/chloecinders.png", "https://chloecinders.com"),
 	member("Cynthia", "/static/av/cynosphere.256.png", "https://c7.pm"),
 
