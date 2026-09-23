@@ -14,9 +14,7 @@ const { title, description } = Astro.props;
 <Base title={title} description={description}>
 	<main>
 		<header>
-			<a href="/static/hn_88x31.gif" target="_blank">
-				<img title="hood network 88x31" src="/static/hn_88x31.gif" />
-			</a>
+			<ProductLogo />
 			<a href="/blog" class="blog-link">
 				blog
 				<ChevronRight class="blog-chevron" />
@@ -25,6 +23,12 @@ const { title, description } = Astro.props;
 
 		<div class="content">
 			<slot />
+		</div>
+
+		<div class="footer">
+			<a href="/static/hn_88x31.gif" target="_blank">
+				<img title="hood network 88x31" src="/static/hn_88x31.gif" />
+			</a>
 		</div>
 	</main>
 
@@ -70,6 +74,13 @@ const { title, description } = Astro.props;
 			flex-direction: column;
 			gap: var(--hn-local-shape);
 			margin-top: var(--hn-local-shape);
+		}
+
+		.footer {
+			margin-top: 1em;
+			display: flex;
+			justify-content: flex-end;
+			min-height: 31px;
 		}
 	</style>
 </Base>
