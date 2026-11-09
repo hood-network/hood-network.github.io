@@ -27,9 +27,7 @@ authors:
   - dydestroyer
   - dziurwa
   - eva
-  - haruka
   - jay
-  - marsh
   - megumin
   - puhbu
   - voc
