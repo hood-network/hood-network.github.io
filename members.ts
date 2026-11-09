@@ -22,11 +22,10 @@ export const members: Member[] = [
 
 	member("eva", "https://github.com/xyzeva.png", "https://eva.ac"),
 
-	member("Haruka", "/static/av/haruka.256.png", "https://shiroko.me"),
-
 	member("Jay", "https://github.com/jay-taelien.png", "https://github.com/jay-taelien"),
 
-	member("marsh", "https://github.com/marshift.png", "https://marsh.zone"),
+	member("Marvin", "https://github.com/nurmarvin.png", "https://nurmarv.in"),
+	member("MDL", "https://github.com/mdl-cmd.png", "https://heartbreak.ing"),
 	member("Megumin", "/static/av/megumin.256.png", "https://github.com/meguminsama"),
 
 	member("puhbu", "https://github.com/puhboo.png", "https://http.cat/404"),
